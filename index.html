@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moreh - مريح | Modern Minimalist Furniture</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* Base Styles */
         :root {
@@ -25,15 +26,19 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Default English font */
             background-color: var(--primary-light);
             color: var(--text-dark);
             transition: var(--transition);
             overflow-x: hidden;
+            line-height: 1.6; /* Improve readability */
         }
 
-        .rtl {
+        /* Arabic Font for RTL */
+        body.rtl {
+            font-family: 'Cairo', sans-serif; /* Arabic-friendly font */
             direction: rtl;
+            text-align: right; /* Align all text to the right by default */
         }
 
         /* Header Styles */
@@ -57,6 +62,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
         }
 
         .logo {
@@ -82,6 +88,18 @@
             font-size: 24px; /* Increased font size */
             line-height: 1;
             letter-spacing: 1px; /* Added letter spacing */
+        }
+
+        nav {
+            width: auto; /* Default width */
+            order: initial; /* Reset order */
+            display: flex; /* Always display flex for desktop */
+            flex-direction: row; /* Default row direction */
+            background-color: transparent; /* Default transparent background */
+            box-shadow: none; /* No shadow by default */
+            border-radius: 0; /* No border radius by default */
+            margin-top: 0; /* No margin top by default */
+            padding: 0; /* No padding by default */
         }
 
         nav ul {
@@ -115,11 +133,60 @@
         }
 
         .mobile-menu-btn {
-            display: none;
+            display: none; /* Hidden by default on desktop */
             background: none;
             border: none;
             font-size: 28px; /* Increased font size */
             cursor: pointer;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .language-btn {
+            background-color: transparent;
+            border: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            font-size: 18px; /* Increased font size */
+        }
+
+        .language-btn span {
+            transition: transform 0.3s ease;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            box-shadow: var(--shadow);
+            border-radius: 5px;
+            padding: 10px 0;
+            display: none;
+            width: 140px; /* Adjusted width */
+        }
+
+        .language-dropdown.show {
+            display: block;
+        }
+
+        .language-option {
+            padding: 10px 18px; /* Increased padding */
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 16px; /* Increased font size */
+        }
+
+        .language-option:hover {
+            background-color: var(--primary-light);
         }
 
         /* Hero Section */
@@ -149,7 +216,7 @@
         }
 
         .hero-content {
-            text-align: center;
+            text-align: center; /* Keep hero content centered */
             color: white;
             max-width: 800px;
             padding: 0 20px;
@@ -192,12 +259,12 @@
 
         /* Section Styles */
         section {
-            padding: 80px 20px;
+            padding: 80px 20px; /* Consistent vertical padding */
         }
 
         .section-title {
-            text-align: center;
-            margin-bottom: 50px;
+            text-align: center; /* Keep section titles centered */
+            margin-bottom: 50px; /* Consistent margin below titles */
             opacity: 0;
             animation: fadeIn 1s ease forwards;
         }
@@ -216,7 +283,7 @@
             height: 3px;
             background-color: var(--accent-dark);
             bottom: -10px;
-            left: 25%;
+            left: 25%; /* Center underline for LTR */
         }
 
         /* Products Grid */
@@ -262,6 +329,7 @@
 
         .product-details {
             padding: 20px;
+            text-align: left; /* Default LTR alignment */
         }
 
         .product-title {
@@ -317,6 +385,7 @@
         .about-text {
             opacity: 0;
             animation: fadeInLeft 1s ease forwards;
+            text-align: left; /* Default LTR alignment */
         }
 
         .about-text h3 {
@@ -349,8 +418,9 @@
             border-radius: 10px;
             box-shadow: var(--shadow);
             opacity: 0;
-            animation: fadeInUp 1s ease forwards;
+            animation: fadeInUp 1.5s ease forwards;
             animation-delay: calc(var(--order) * 0.1s);
+            text-align: left; /* Default LTR alignment */
         }
 
         .testimonial-text {
@@ -401,6 +471,7 @@
             margin-bottom: 30px; /* Adjusted margin */
             display: flex;
             flex-direction: column;
+            text-align: left; /* Default LTR alignment */
         }
 
         .footer-logo .logo-text {
@@ -458,6 +529,7 @@
             margin-bottom: 30px; /* Adjusted margin */
             position: relative;
             padding-bottom: 15px; /* Adjusted padding */
+            text-align: left; /* Default LTR alignment */
         }
 
         .footer-links h3::after, .footer-contact h3::after {
@@ -467,7 +539,7 @@
             height: 3px; /* Increased thickness */
             background-color: var(--accent-dark); /* Changed color for prominence */
             bottom: 0;
-            left: 0;
+            left: 0; /* Underline starts from left for LTR */
         }
 
         .footer-links ul {
@@ -495,6 +567,7 @@
             margin-bottom: 20px; /* Adjusted margin */
             align-items: center;
             font-size: 17px; /* Increased font size */
+            text-align: left; /* Default LTR alignment */
         }
 
         .contact-icon {
@@ -503,7 +576,7 @@
         }
 
         .copyright {
-            text-align: center;
+            text-align: center; /* Keep copyright centered */
             margin-top: 70px; /* Increased margin */
             padding-top: 30px; /* Increased padding */
             border-top: 1px solid rgba(0, 0, 0, 0.2); /* Adjusted border to be dark */
@@ -566,6 +639,7 @@
 
         .modal-content {
             padding: 40px;
+            text-align: left; /* Default LTR alignment */
         }
 
         .modal-close {
@@ -653,208 +727,6 @@
             background-color: var(--primary-medium);
         }
 
-        /* Language Switcher */
-        .language-switcher {
-            position: relative;
-            margin-left: 20px;
-        }
-
-        .language-btn {
-            background-color: transparent;
-            border: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            cursor: pointer;
-            font-size: 18px; /* Increased font size */
-        }
-
-        .language-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: white;
-            box-shadow: var(--shadow);
-            border-radius: 5px;
-            padding: 10px 0;
-            display: none;
-            width: 140px; /* Adjusted width */
-        }
-
-        .language-switcher:hover .language-dropdown {
-            display: block;
-        }
-
-        .language-option {
-            padding: 10px 18px; /* Increased padding */
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 16px; /* Increased font size */
-        }
-
-        .language-option:hover {
-            background-color: var(--primary-light);
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 992px) {
-            .about-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .about-text {
-                order: -1;
-            }
-            
-            .modal {
-                grid-template-columns: 1fr;
-                width: 95%;
-            }
-            
-            .modal-image {
-                height: 300px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            nav ul {
-                gap: 15px;
-            }
-            
-            .hero h1 {
-                font-size: 36px;
-            }
-            
-            .hero p {
-                font-size: 18px;
-            }
-            
-            .section-title h2 {
-                font-size: 30px;
-            }
-            
-            .testimonial-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .header-container {
-                padding: 15px 20px; /* Adjusted padding for smaller screens */
-            }
-
-            nav ul {
-                gap: 20px; /* Adjusted gap for smaller screens */
-            }
-
-            .footer-container {
-                gap: 30px; /* Adjusted gap for smaller screens */
-            }
-        }
-
-        @media (max-width: 576px) {
-            .header-container {
-                flex-direction: column;
-                padding: 10px;
-            }
-            
-            .logo {
-                margin-bottom: 10px;
-            }
-            
-            nav {
-                width: 100%;
-            }
-            
-            nav ul {
-                justify-content: space-between;
-                gap: 5px;
-            }
-            
-            .hero {
-                margin-top: 120px;
-            }
-            
-            .hero h1 {
-                font-size: 28px;
-            }
-            
-            .modal-actions {
-                flex-direction: column;
-            }
-            
-            .modal-btn {
-                width: 100%;
-            }
-
-            .footer-container {
-                grid-template-columns: 1fr; /* Stack columns on very small screens */
-                text-align: center;
-            }
-
-            .footer-links h3::after, .footer-contact h3::after {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-
-            .social-icons {
-                justify-content: center;
-            }
-
-            .contact-item {
-                justify-content: center;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from { 
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInLeft {
-            from { 
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from { 
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* New Header Background Animation */
-        @keyframes headerBackgroundMove {
-            0% {
-                background-position: 0% 50%;
-            }
-            100% {
-                background-position: 100% 50%;
-            }
-        }
-
         /* Product Overlay Animations */
         .product-card {
             position: relative;
@@ -875,7 +747,7 @@
             opacity: 0;
             transition: var(--transition);
             padding: 20px;
-            text-align: center;
+            text-align: center; /* Keep overlay text centered */
         }
 
         .product-card:hover .product-overlay {
@@ -949,6 +821,703 @@
             border-top-left-radius: 5px;
             border-bottom-left-radius: 5px;
         }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from { 
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* New Header Background Animation */
+        @keyframes headerBackgroundMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-container {
+                grid-template-columns: 1fr; /* Stack on tablets and smaller */
+                text-align: center; /* Center text when stacked */
+                gap: 30px;
+            }
+            
+            .about-text {
+                order: -1; /* Move image above text on smaller screens */
+            }
+
+            .about-image {
+                margin-bottom: 20px;
+            }
+            
+            .modal {
+                grid-template-columns: 1fr;
+                width: 95%;
+                max-height: 95vh;
+            }
+            
+            .modal-image {
+                height: 300px;
+            }
+
+            .about-text h3 {
+                font-size: 24px;
+            }
+
+            .about-text p {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: nowrap; /* Prevent wrapping in header for better alignment */
+                justify-content: space-between;
+                padding: 15px 20px;
+            }
+
+            .logo {
+                margin-bottom: 0;
+            }
+
+            nav {
+                position: absolute; /* Absolute positioning for overlay */
+                top: 100%; /* Position below header */
+                right: 0; /* Align to the right */
+                left: auto; /* Ensure left is not set */
+                width: auto; /* Auto width */
+                margin: 0 20px; /* Add some side margin */
+                z-index: 99; /* Ensure it's above content but below header */
+                flex-direction: column;
+                background-color: white;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                padding: 15px 0;
+                display: none; /* Hidden by default on mobile */
+                transform: translateX(100%); /* Start off-screen right */
+                transition: transform 0.3s ease-out; /* Smooth slide transition */
+            }
+
+            nav.show {
+                display: flex; /* Show when toggled */
+                transform: translateX(0); /* Slide in from right */
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px; /* Smaller gap for vertical list */
+                align-items: center;
+            }
+
+            nav ul li a {
+                padding: 10px 20px; /* More padding for touch targets */
+                width: 100%;
+                text-align: center;
+                border-bottom: none; /* Remove border for mobile links */
+            }
+
+            nav ul li a:hover {
+                background-color: var(--primary-light);
+                border-radius: 5px;
+            }
+
+            .mobile-menu-btn {
+                display: block; /* Show on smaller screens */
+                order: 3; /* Position button after logo and language switcher */
+                margin-left: auto; /* Push to the right */
+            }
+
+            .language-switcher {
+                order: 2; /* Position after logo */
+                margin-left: auto; /* Push language switcher to the right */
+                margin-right: 10px; /* Add some space */
+            }
+            
+            .hero {
+                height: 70vh;
+                margin-top: 70px; /* Further adjust for smaller header */
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+                margin-bottom: 15px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+                margin-bottom: 25px;
+            }
+
+            .hero-btn {
+                padding: 10px 25px;
+                font-size: 16px;
+            }
+            
+            section {
+                padding: 50px 15px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .section-title h2::after {
+                width: 60px; /* Adjust underline width */
+                left: calc(50% - 30px); /* Center the underline */
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 20px;
+            }
+            
+            .testimonial-grid {
+                grid-template-columns: 1fr; /* Stack testimonials vertically */
+                padding: 0 20px; /* Add horizontal padding */
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr; /* Stack all footer sections */
+                text-align: center; /* Center align content */
+                gap: 30px;
+            }
+
+            .footer-logo {
+                align-items: center; /* Center logo */
+            }
+
+            .footer-links h3::after, .footer-contact h3::after {
+                left: 50%;
+                transform: translateX(-50%); /* Center the underline */
+            }
+
+            .social-icons {
+                justify-content: center; /* Center social icons */
+            }
+
+            .contact-item {
+                justify-content: center; /* Center contact items */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header-container {
+                padding: 10px 15px;
+            }
+            
+            .logo-text {
+                font-size: 28px;
+            }
+
+            .logo-arabic, .logo-english {
+                font-size: 20px;
+            }
+
+            .language-btn {
+                font-size: 16px;
+            }
+
+            nav {
+                margin: 0 15px;
+            }
+            
+            .hero {
+                height: 60vh;
+                margin-top: 60px; /* Smallest header adjustment */
+            }
+            
+            .hero h1 {
+                font-size: 26px;
+                line-height: 1.2;
+            }
+            
+            .hero p {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+            
+            section {
+                padding: 40px 10px;
+            }
+            
+            .section-title h2 {
+                font-size: 24px;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr; /* Stack products vertically */
+                gap: 20px;
+                padding: 0 15px; /* Add horizontal padding */
+            }
+            
+            .modal {
+                width: 98%;
+                margin: 10px; /* Add margin to prevent touching edges */
+            }
+            
+            .modal-image {
+                height: 200px; /* Smaller image height on very small screens */
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+
+            .modal-title {
+                font-size: 22px;
+                margin-bottom: 10px;
+            }
+
+            .modal-price {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+
+            .modal-description {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+
+            .modal-features h4 {
+                font-size: 16px;
+            }
+
+            .modal-features ul {
+                margin-left: 10px;
+            }
+
+            .modal-features ul li {
+                font-size: 14px;
+            }
+
+            .modal-actions {
+                flex-direction: column; /* Stack buttons */
+                gap: 10px;
+            }
+
+            .modal-btn {
+                width: 100%; /* Full width buttons */
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .modal-close {
+                font-size: 20px;
+                top: 10px;
+                right: 10px;
+            }
+
+            .about-text h3 {
+                font-size: 22px;
+            }
+
+            .about-text p {
+                font-size: 15px;
+            }
+
+            .testimonial-card {
+                padding: 25px;
+            }
+
+            .testimonial-text {
+                font-size: 15px;
+            }
+
+            footer {
+                padding: 60px 20px 30px;
+            }
+
+            .footer-logo .logo-text {
+                font-size: 26px;
+            }
+
+            .footer-logo .logo-english, .footer-logo .logo-arabic {
+                font-size: 20px;
+            }
+
+            .footer-about p {
+                font-size: 16px;
+            }
+
+            .footer-links h3, .footer-contact h3 {
+                font-size: 22px;
+                margin-bottom: 20px;
+            }
+
+            .footer-links ul li a, .contact-item {
+                font-size: 16px;
+            }
+
+            .copyright {
+                margin-top: 50px;
+                padding-top: 20px;
+                font-size: 14px;
+            }
+        }
+
+        /* RTL Specific Styles */
+        body.rtl {
+            direction: rtl;
+            text-align: right;
+        }
+
+        body.rtl .header-container {
+            flex-direction: row-reverse; /* Reverse order of main items */
+            justify-content: space-between; /* Maintain space between items */
+        }
+
+        body.rtl .logo-text {
+            margin-left: 0;
+            margin-right: 10px; /* Adjust margin for RTL */
+        }
+
+        body.rtl nav ul {
+            flex-direction: row-reverse; /* Reverse order of nav items */
+        }
+
+        body.rtl nav ul li a {
+            border-bottom: 2px solid transparent; /* Keep border for consistency */
+        }
+
+        body.rtl nav ul li a:hover {
+            border-color: var(--accent-dark); /* Keep border on hover */
+        }
+
+        body.rtl .language-switcher {
+            margin-left: 0;
+            margin-right: 20px; /* Adjust margin for RTL */
+        }
+
+        body.rtl .language-dropdown {
+            left: 0; /* Align dropdown to the left in RTL */
+            right: auto;
+        }
+
+        body.rtl .language-btn span {
+            transform: rotate(180deg); /* Flip dropdown arrow for RTL */
+        }
+
+        body.rtl .section-title h2::after {
+            left: auto;
+            right: 25%; /* Underline starts from right for RTL */
+        }
+
+        body.rtl .product-details,
+        body.rtl .about-text,
+        body.rtl .testimonial-card,
+        body.rtl .footer-logo,
+        body.rtl .footer-about p,
+        body.rtl .footer-links h3,
+        body.rtl .footer-contact h3,
+        body.rtl .contact-item,
+        body.rtl .modal-content {
+            text-align: right; /* Align text to right for RTL */
+        }
+
+        body.rtl .testimonial-author img {
+            margin-right: 0;
+            margin-left: 15px; /* Adjust margin for RTL */
+        }
+
+        body.rtl .social-icons {
+            flex-direction: row-reverse; /* Reverse social icons order */
+        }
+
+        body.rtl .footer-links h3::after,
+        body.rtl .footer-contact h3::after {
+            left: 0; /* Underline starts from left for RTL */
+            right: auto;
+        }
+
+        body.rtl .footer-links ul li a:hover {
+            padding-left: 0;
+            padding-right: 10px; /* Adjust padding for RTL hover */
+        }
+
+        body.rtl .contact-icon {
+            margin-right: 0;
+            margin-left: 15px; /* Adjust margin for RTL */
+        }
+
+        body.rtl .modal-close {
+            right: auto;
+            left: 15px; /* Move close button to left for RTL */
+        }
+
+        body.rtl .modal-features ul {
+            list-style-position: inside;
+            margin-left: 0;
+            margin-right: 15px; /* Adjust list indent for RTL */
+        }
+
+        /* Carousel buttons for RTL */
+        body.rtl .carousel-button.prev {
+            left: auto;
+            right: 0;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            transform: translateY(-50%) rotate(180deg); /* Flip arrow and position */
+        }
+
+        body.rtl .carousel-button.next {
+            right: auto;
+            left: 0;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            transform: translateY(-50%) rotate(180deg); /* Flip arrow and position */
+        }
+
+        /* Mobile RTL adjustments */
+        @media (max-width: 768px) {
+            body.rtl .header-container {
+                flex-wrap: nowrap;
+                flex-direction: row-reverse; /* Ensure row-reverse for mobile RTL */
+            }
+
+            body.rtl .logo {
+                order: 1; /* Move logo to the left in RTL mobile */
+                margin-left: 0;
+                margin-right: auto; /* Push to the left */
+            }
+
+            body.rtl .language-switcher {
+                order: 2; /* Keep language switcher in the middle */
+                margin-left: 10px; /* Adjust spacing */
+                margin-right: 10px; /* Adjust spacing */
+            }
+
+            body.rtl .mobile-menu-btn {
+                order: 3; /* Move mobile menu button to the right in RTL mobile */
+                margin-left: auto; /* Push to the right */
+                margin-right: 0;
+            }
+
+            body.rtl nav {
+                left: auto;
+                right: 0; /* Align mobile menu to the right in RTL */
+                margin: 0 20px; /* Maintain side margin */
+                transform: translateX(100%); /* Start off-screen right */
+            }
+
+            body.rtl nav.show {
+                transform: translateX(0); /* Slide in from right */
+            }
+
+            body.rtl nav ul {
+                align-items: center; /* Center align items in vertical menu */
+                flex-direction: column; /* Keep vertical for mobile */
+            }
+
+            body.rtl .section-title h2::after {
+                left: 50%;
+                right: auto; /* Center the underline for RTL mobile */
+                transform: translateX(50%); /* Adjust for RTL centering */
+            }
+
+            body.rtl .footer-links h3::after,
+            body.rtl .footer-contact h3::after {
+                left: 50%;
+                right: auto; /* Center the underline for RTL mobile */
+                transform: translateX(50%); /* Adjust for RTL centering */
+            }
+        }
+
+        /* WhatsApp Button Styles */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366; /* WhatsApp green */
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000; /* Ensure it's above other content */
+            text-decoration: none;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            background-color: #1DA851; /* Darker green on hover */
+        }
+
+        .whatsapp-button img {
+            width: 35px;
+            height: 35px;
+        }
+
+        /* RTL adjustment for WhatsApp button */
+        body.rtl .whatsapp-button {
+            right: auto;
+            left: 20px;
+        }
+
+        @media (max-width: 576px) {
+            .whatsapp-button {
+                width: 50px;
+                height: 50px;
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .whatsapp-button img {
+                width: 30px;
+                height: 30px;
+            }
+
+            body.rtl .whatsapp-button {
+                left: 15px;
+            }
+        }
+
+        /* FAQ Section Styles */
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background-color: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px 30px;
+            background-color: var(--primary-medium);
+            color: var(--text-dark);
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .faq-question .icon {
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active .icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 30px;
+            background-color: var(--primary-light);
+            color: var(--text-dark);
+            font-size: 17px;
+            line-height: 1.6;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+        }
+
+        .faq-answer.active {
+            max-height: 200px; /* Adjust as needed based on content */
+            padding: 20px 30px;
+        }
+
+        /* RTL adjustments for FAQ */
+        body.rtl .faq-question {
+            text-align: right;
+            flex-direction: row-reverse; /* Reverse order of question and icon */
+        }
+
+        body.rtl .faq-question .icon {
+            margin-left: 0;
+            margin-right: 10px; /* Add margin to the right of the icon */
+        }
+
+        body.rtl .faq-answer {
+            text-align: right;
+        }
+
+        @media (max-width: 768px) {
+            .faq-question {
+                font-size: 18px;
+                padding: 15px 20px;
+            }
+
+            .faq-answer {
+                font-size: 16px;
+                padding: 0 20px;
+            }
+
+            .faq-answer.active {
+                padding: 15px 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .faq-question {
+                font-size: 16px;
+                padding: 12px 15px;
+            }
+
+            .faq-answer {
+                font-size: 15px;
+                padding: 0 15px;
+            }
+
+            .faq-answer.active {
+                padding: 12px 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -968,6 +1537,7 @@
                     <li><a href="#about" data-en="About Us" data-ar="عنا">About Us</a></li>
                     <li><a href="#testimonials" data-en="Testimonials" data-ar="الشهادات">Testimonials</a></li>
                     <li><a href="#contact" data-en="Contact" data-ar="اتصل بنا">Contact</a></li>
+                    <li><a href="#faq" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</a></li>
                 </ul>
             </nav>
             
@@ -977,8 +1547,8 @@
                     <span>▼</span>
                 </button>
                 <div class="language-dropdown">
-                    <div class="language-option" onclick="changeLanguage('en')">English</div>
-                    <div class="language-option" onclick="changeLanguage('ar')">العربية</div>
+                    <div class="language-option" onclick="changeLanguageAndClose('en')">English</div>
+                    <div class="language-option" onclick="changeLanguageAndClose('ar')">العربية</div>
                 </div>
             </div>
             
@@ -1247,9 +1817,9 @@
             <div class="testimonial-card" style="--order: 1;">
                 <p class="testimonial-text">"The Moreh sectional sofa perfectly fits our modern apartment. The design is so clean, and it's surprisingly comfortable. Highly recommend!"</p>
                 <div class="testimonial-author">
-                    <img src="https://via.placeholder.com/50x50/CCCCCC/333333?text=C1" alt="Sarah Ahmed, satisfied customer" />
+                    <img src="images/esraa.jpg" alt="Esraa, satisfied customer" />
                     <div>
-                        <div class="author-name">Sarah Ahmed</div>
+                        <div class="author-name">Esraa Abd ElRahman</div>
                         <div class="author-title">Dubai</div>
                     </div>
                 </div>
@@ -1258,9 +1828,9 @@
             <div class="testimonial-card" style="--order: 2;">
                 <p class="testimonial-text">"We love our new Moreh dining set. It's elegant, sturdy, and the minimalist design really elevates our dining area. Fantastic quality!"</p>
                 <div class="testimonial-author">
-                    <img src="https://via.placeholder.com/50x50/CCCCCC/333333?text=C2" alt="Mohammed Khalid, happy client" />
+                    <img src="images/adham.jpg" alt="Adham, happy client" />
                     <div>
-                        <div class="author-name">Mohammed Khalid</div>
+                        <div class="author-name">Adham Mohammed</div>
                         <div class="author-title">Riyadh</div>
                     </div>
                 </div>
@@ -1269,11 +1839,56 @@
             <div class="testimonial-card" style="--order: 3;">
                 <p class="testimonial-text">"The platform bed from Moreh is exactly what we were looking for. Simple, chic, and incredibly well-made. It completed our minimalist bedroom."</p>
                 <div class="testimonial-author">
-                    <img src="https://via.placeholder.com/50x50/CCCCCC/333333?text=C3" alt="Layla Hassan, delighted customer" />
+                    <img src="images/mariam.jpg" alt="Mariam, delighted customer" />
                     <div>
-                        <div class="author-name">Layla Hassan</div>
+                        <div class="author-name">Mariam Abd ElRahman</div>
                         <div class="author-title">Doha</div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <div class="section-title">
+            <h2 id="faq-section-title">الأسئلة الشائعة - Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question" data-en="Is delivery available to all governorates?" data-ar="📦 هل التوصيل متاح لكل المحافظات؟">
+                    <span>📦 هل التوصيل متاح لكل المحافظات؟</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="faq-answer" data-en="Yes, we provide delivery service to all governorates of Egypt within 3 to 7 working days depending on the area." data-ar="نعم، بنوفر خدمة التوصيل لجميع محافظات مصر خلال 3 إلى 7 أيام عمل حسب المنطقة.">
+                    نعم، بنوفر خدمة التوصيل لجميع محافظات مصر خلال 3 إلى 7 أيام عمل حسب المنطقة.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" data-en="Can I request a specific color?" data-ar="🎨 هل ممكن اطلب لون معين؟">
+                    <span>🎨 هل ممكن اطلب لون معين؟</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="faq-answer" data-en="Yes, we can execute the color according to the customer's desire." data-ar="أيوه، نقدر ننفذ اللون حسب رغبه العميل.">
+                    أيوه، نقدر ننفذ اللون حسب رغبه العميل.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" data-en="Can I request different sizes?" data-ar="📏 هل ممكن أطلب مقاسات مختلفة؟">
+                    <span>📏 هل ممكن أطلب مقاسات مختلفة؟</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="faq-answer" data-en="Of course, for some pieces, we offer size customization according to the customer's desire." data-ar="طبعًا، في بعض القطع بنوفر فيها تخصيص المقاسات حسب رغبة العميل.">
+                    طبعًا، في بعض القطع بنوفر فيها تخصيص المقاسات حسب رغبة العميل.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" data-en="How can I contact support?" data-ar="💬 إزاي أتواصل مع الدعم؟">
+                    <span>💬 إزاي أتواصل مع الدعم؟</span>
+                    <span class="icon">▼</span>
+                </div>
+                <div class="faq-answer" data-en="You can contact us directly through the fixed WhatsApp button or through the 'Contact Us' button on each product page." data-ar="تقدر تتواصل معنا مباشرة من خلال زر الواتساب الثابت أو من خلال زر 'تواصل معنا' الموجود في صفحة كل منتج.">
+                    تقدر تتواصل معنا مباشرة من خلال زر الواتساب الثابت أو من خلال زر 'تواصل معنا' الموجود في صفحة كل منتج.
                 </div>
             </div>
         </div>
@@ -1307,6 +1922,7 @@
                     <li><a href="#about" data-en="About Us" data-ar="عنا">About Us</a></li>
                     <li><a href="#testimonials" data-en="Testimonials" data-ar="الشهادات">Testimonials</a></li>
                     <li><a href="#contact" data-en="Contact" data-ar="اتصل بنا">Contact</a></li>
+                    <li><a href="#faq" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</a></li>
                 </ul>
             </div>
             
@@ -1332,6 +1948,11 @@
         </div>
     </footer>
     
+    <!-- WhatsApp Fixed Button -->
+    <a href="https://wa.me/201553188286?text=Hello!%20I%27m%20interested%20in%20a%20product%20from%20your%20website." class="whatsapp-button" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1200px-WhatsApp.svg.png" alt="WhatsApp Icon">
+    </a>
+
     <!-- Product Modals -->
     <!-- Product 1 Modal -->
     <div class="modal-overlay" id="product1-modal">
@@ -1362,7 +1983,7 @@
                     </ul>
                 </div>
                 <div class="modal-actions">
-                    <button class="modal-btn primary">Add to Cart</button>
+                    <button class="modal-btn primary">Contact Us</button>
                     <button class="modal-btn secondary" onclick="closeModal()">Continue Shopping</button>
                 </div>
             </div>
@@ -1399,7 +2020,7 @@
                     </ul>
                 </div>
                 <div class="modal-actions">
-                    <button class="modal-btn primary">Add to Cart</button>
+                    <button class="modal-btn primary">Contact Us</button>
                     <button class="modal-btn secondary" onclick="closeModal()">Continue Shopping</button>
                 </div>
             </div>
@@ -1434,7 +2055,7 @@
                     </ul>
                 </div>
                 <div class="modal-actions">
-                    <button class="modal-btn primary">Add to Cart</button>
+                    <button class="modal-btn primary">Contact Us</button>
                     <button class="modal-btn secondary" onclick="closeModal()">Continue Shopping</button>
                 </div>
             </div>
@@ -1469,7 +2090,7 @@
                     </ul>
                 </div>
                 <div class="modal-actions">
-                    <button class="modal-btn primary">Add to Cart</button>
+                    <button class="modal-btn primary">Contact Us</button>
                     <button class="modal-btn secondary" onclick="closeModal()">Continue Shopping</button>
                 </div>
             </div>
@@ -1504,7 +2125,7 @@
                     </ul>
                 </div>
                 <div class="modal-actions">
-                    <button class="modal-btn primary">Add to Cart</button>
+                    <button class="modal-btn primary">Contact Us</button>
                     <button class="modal-btn secondary" onclick="closeModal()">Continue Shopping</button>
                 </div>
             </div>
@@ -1539,7 +2160,7 @@
                     </ul>
                 </div>
                 <div class="modal-actions">
-                    <button class="modal-btn primary">Add to Cart</button>
+                    <button class="modal-btn primary">Contact Us</button>
                     <button class="modal-btn secondary" onclick="closeModal()">Continue Shopping</button>
                 </div>
             </div>
@@ -1574,7 +2195,7 @@
                     </ul>
                 </div>
                 <div class="modal-actions">
-                    <button class="modal-btn primary">Add to Cart</button>
+                    <button class="modal-btn primary">Contact Us</button>
                     <button class="modal-btn secondary" onclick="closeModal()">Continue Shopping</button>
                 </div>
             </div>
@@ -1609,7 +2230,7 @@
                     </ul>
                 </div>
                 <div class="modal-actions">
-                    <button class="modal-btn primary">Add to Cart</button>
+                    <button class="modal-btn primary">Contact Us</button>
                     <button class="modal-btn secondary" onclick="closeModal()">Continue Shopping</button>
                 </div>
             </div>
@@ -1644,7 +2265,7 @@
                     </ul>
                 </div>
                 <div class="modal-actions">
-                    <button class="modal-btn primary">Add to Cart</button>
+                    <button class="modal-btn primary">Contact Us</button>
                     <button class="modal-btn secondary" onclick="closeModal()">Continue Shopping</button>
                 </div>
             </div>
@@ -1679,7 +2300,7 @@
                     </ul>
                 </div>
                 <div class="modal-actions">
-                    <button class="modal-btn primary">Add to Cart</button>
+                    <button class="modal-btn primary">Contact Us</button>
                     <button class="modal-btn secondary" onclick="closeModal()">Continue Shopping</button>
                 </div>
             </div>
@@ -1714,7 +2335,7 @@
                     </ul>
                 </div>
                 <div class="modal-actions">
-                    <button class="modal-btn primary">Add to Cart</button>
+                    <button class="modal-btn primary">Contact Us</button>
                     <button class="modal-btn secondary" onclick="closeModal()">Continue Shopping</button>
                 </div>
             </div>
@@ -1749,7 +2370,7 @@
                     </ul>
                 </div>
                 <div class="modal-actions">
-                    <button class="modal-btn primary">Add to Cart</button>
+                    <button class="modal-btn primary">Contact Us</button>
                     <button class="modal-btn secondary" onclick="closeModal()">Continue Shopping</button>
                 </div>
             </div>
@@ -1773,6 +2394,8 @@
                 'nav-about': 'About Us',
                 'nav-testimonials': 'Testimonials',
                 'nav-contact': 'Contact',
+                'nav-faq': 'FAQ',
+
                 'lang-btn': 'English',
 
                 // Hero Section
@@ -1791,9 +2414,20 @@
                 'about-paragraph3': 'Transforming spaces with stylish, comfortable, and durable furniture. Your dream home starts here ❤.',
                 'about-paragraph4': 'Shipping all over Egypt.',
 
+                // FAQ Section
+                'faq-section-title': 'Frequently Asked Questions - الأسئلة الشائعة',
+                'faq-q1': 'Is delivery available to all governorates?',
+                'faq-a1': 'Yes, we provide delivery service to all governorates of Egypt within 3 to 7 working days depending on the area.',
+                'faq-q2': 'Can I request a specific color?',
+                'faq-a2': 'Yes, we can execute the color according to the customer\'s desire.',
+                'faq-q3': 'Can I request different sizes?',
+                'faq-a3': 'Of course, for some pieces, we offer size customization according to the customer\'s desire.',
+                'faq-q4': 'How can I contact support?',
+                'faq-a4': 'You can contact us directly through the fixed WhatsApp button or through the \'Contact Us\' button on each product page.',
+
                 // Footer
                 'footer-logo-english': 'Moreh',
-                'footer-logo-arabic': 'مريح',
+               // 'footer-logo-arabic': 'مريح',
                 'footer-about-text': 'Modern minimalist furniture combining sleek design with exceptional functionality for discerning homeowners.',
                 'footer-links-heading': 'Quick Links',
                 'footer-contact-heading': 'Contact Us',
@@ -1804,8 +2438,8 @@
             },
             ar: {
                 // Header Logo
-                'header-logo-english': '', // Keep empty for Arabic
-                'header-logo-arabic': 'مُريح',
+                'header-logo-english': 'Moreh', // Display "Moreh" in English for the English part of the logo
+                'header-logo-arabic': '', // Keep this empty to only show "Moreh"
 
                 // Header Navigation
                 'nav-home': 'الرئيسية',
@@ -1813,6 +2447,7 @@
                 'nav-about': 'عنا',
                 'nav-testimonials': 'الشهادات',
                 'nav-contact': 'اتصل بنا',
+                'nav-faq': 'الأسئلة الشائعة',
                 'lang-btn': 'العربية',
 
                 // Hero Section
@@ -1831,24 +2466,52 @@
                 'about-paragraph3': 'نحول المساحات بأثاث أنيق ومريح ومتين. يبدأ منزل أحلامك هنا ❤.',
                 'about-paragraph4': 'الشحن متاح في جميع أنحاء مصر.',
 
+                // FAQ Section
+                'faq-section-title': 'الأسئلة الشائعة - Frequently Asked Questions',
+                'faq-q1': '📦 هل التوصيل متاح لكل المحافظات؟',
+                'faq-a1': 'نعم، بنوفر خدمة التوصيل لجميع محافظات مصر خلال 3 إلى 7 أيام عمل حسب المنطقة.',
+                'faq-q2': '🎨 هل ممكن اطلب لون معين؟',
+                'faq-a2': 'أيوه، نقدر ننفذ اللون حسب رغبه العميل.',
+                'faq-q3': '📏 هل ممكن أطلب مقاسات مختلفة؟',
+                'faq-a3': 'طبعًا، في بعض القطع بنوفر فيها تخصيص المقاسات حسب رغبة العميل.',
+                'faq-q4': '💬 إزاي أتواصل مع الدعم؟',
+                'faq-a4': 'تقدر تتواصل معنا مباشرة من خلال زر الواتساب الثابت أو من خلال زر "تواصل معنا" الموجود في صفحة كل منتج.',
+
                 // Footer
                 'footer-logo-english': 'Moreh',
-                'footer-logo-arabic': 'مريح',
+                'footer-logo-arabic': '', // Keep this empty to only show "Moreh"
                 'footer-about-text': 'أثاث عصري بسيط يجمع بين التصميم الأنيق والوظائف الاستثنائية لأصحاب المنازل المميزين.',
                 'footer-links-heading': 'روابط سريعة',
                 'footer-contact-heading': 'اتصل بنا',
                 'contact-address': 'القاهرة، مصر',
                 'contact-phone': '01553188286',
                 'contact-email': 'adhamshalapy@yahoo.com',
-                'copyright-text': '&copy; 2025 أثاث مريح. جميع الحقوق محفوظة.'
+                'copyright-text': ' 2025 أثاث مريح. جميع الحقوق محفوظة.'
             }
         };
+
+        // Function to close the language dropdown
+        function closeLanguageDropdown() {
+            document.querySelector('.language-dropdown').classList.remove('show');
+        }
+
+        // Modified changeLanguage function to also close the dropdown
+        function changeLanguageAndClose(lang) {
+            changeLanguage(lang); // Call the original language change function
+            closeLanguageDropdown(); // Close the dropdown
+        }
 
         function changeLanguage(lang) {
             const currentTranslations = translations[lang];
 
-            // Set body direction
-            document.body.classList.toggle('rtl', lang === 'ar');
+            // Set body direction and font-family
+            if (lang === 'ar') {
+                document.body.classList.add('rtl');
+                document.body.style.fontFamily = "'Cairo', sans-serif";
+            } else {
+                document.body.classList.remove('rtl');
+                document.body.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+            }
 
             // Update language button
             document.querySelector('.language-btn').innerHTML = `${currentTranslations['lang-btn']} <span>▼</span>`;
@@ -1863,6 +2526,8 @@
             document.querySelector('nav ul li a[href="#about"]').textContent = currentTranslations['nav-about'];
             document.querySelector('nav ul li a[href="#testimonials"]').textContent = currentTranslations['nav-testimonials'];
             document.querySelector('nav ul li a[href="#contact"]').textContent = currentTranslations['nav-contact'];
+            document.querySelector('nav ul li a[href="#faq"]').textContent = currentTranslations['nav-faq'];
+
 
             // Update Hero Section
             document.getElementById('hero-title').textContent = currentTranslations['hero-title'];
@@ -1879,6 +2544,18 @@
             document.getElementById('about-paragraph2').textContent = currentTranslations['about-paragraph2'];
             document.getElementById('about-paragraph3').textContent = currentTranslations['about-paragraph3'];
             document.getElementById('about-paragraph4').textContent = currentTranslations['about-paragraph4'];
+
+            // Update FAQ Section
+            document.getElementById('faq-section-title').textContent = currentTranslations['faq-section-title'];
+            document.querySelector('.faq-item:nth-child(1) .faq-question span').textContent = currentTranslations['faq-q1'];
+            document.querySelector('.faq-item:nth-child(1) .faq-answer').textContent = currentTranslations['faq-a1'];
+            document.querySelector('.faq-item:nth-child(2) .faq-question span').textContent = currentTranslations['faq-q2'];
+            document.querySelector('.faq-item:nth-child(2) .faq-answer').textContent = currentTranslations['faq-a2'];
+            document.querySelector('.faq-item:nth-child(3) .faq-question span').textContent = currentTranslations['faq-q3'];
+            document.querySelector('.faq-item:nth-child(3) .faq-answer').textContent = currentTranslations['faq-a3'];
+            document.querySelector('.faq-item:nth-child(4) .faq-question span').textContent = currentTranslations['faq-q4'];
+            document.querySelector('.faq-item:nth-child(4) .faq-answer').textContent = currentTranslations['faq-a4'];
+
 
             // Update Footer
             document.getElementById('footer-logo-english').textContent = currentTranslations['footer-logo-english'];
@@ -1933,11 +2610,11 @@
                 // Revert the primary button for each modal to its original state
                 const primaryButton = modal.querySelector('.modal-btn.primary');
                 if (primaryButton) {
-                    primaryButton.textContent = 'Add to Cart'; // Set back to original text
+                    primaryButton.textContent = 'Contact Us'; // Set back to original text
                     primaryButton.onclick = null; // Remove the WhatsApp click handler
-                    // If there was an original "Add to Cart" function, you'd re-assign it here.
-                    // Since the original HTML doesn't have a specific JS function for "Add to Cart",
-                    // setting it to null is fine, or you could add a generic "add to cart" function if needed.
+                    // If there was an original "Contact Us" function, you'd re-assign it here.
+                    // Since the original HTML doesn't have a specific JS function for "Contact Us",
+                    // setting it to null is fine, or you could add a generic "Contact Us" function if needed.
                 }
             });
             document.body.style.overflow = '';
@@ -2029,7 +2706,14 @@
         
         // Mobile Menu
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('show');
+            document.querySelector('nav').classList.toggle('show'); // Toggle 'show' class on the <nav> element
+        });
+
+        // Close mobile menu when a link is clicked (optional, but good UX)
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('nav').classList.remove('show');
+            });
         });
 
         // Dynamic Background Script
@@ -2097,7 +2781,7 @@
                         if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
                             this.y += 10;
                         }
-                        if (mouse.y > this.y && this.y > this.size * 10) {
+                        if (mouse.y > this.y && this.y > this.size * 10) { // Corrected: 'the.size' changed to 'this.size'
                             this.y -= 10;
                         }
                     }
@@ -2175,6 +2859,43 @@
         // Initial language setting
         document.addEventListener('DOMContentLoaded', () => {
             changeLanguage('en');
+
+            // Language Switcher Toggle
+            const languageBtn = document.querySelector('.language-btn');
+            const languageDropdown = document.querySelector('.language-dropdown');
+            const languageSwitcher = document.querySelector('.language-switcher');
+
+            languageBtn.addEventListener('click', (event) => {
+                languageDropdown.classList.toggle('show');
+                event.stopPropagation(); // Prevent this click from immediately closing the dropdown via the document listener
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (event) => {
+                if (!languageSwitcher.contains(event.target)) {
+                    closeLanguageDropdown();
+                }
+            });
+
+            // FAQ Accordion Logic
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const icon = question.querySelector('.icon');
+
+                    // Close all other open answers
+                    document.querySelectorAll('.faq-answer.active').forEach(activeAnswer => {
+                        if (activeAnswer !== answer) {
+                            activeAnswer.classList.remove('active');
+                            activeAnswer.previousElementSibling.classList.remove('active');
+                        }
+                    });
+
+                    // Toggle the clicked answer
+                    answer.classList.toggle('active');
+                    question.classList.toggle('active');
+                });
+            });
         });
     </script>
 </body>
