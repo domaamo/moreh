@@ -17,6 +17,47 @@
             --text-light: #f5f5f5;
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
+
+            /* Dark Mode Colors - Default to light mode values */
+            --bg-color: var(--primary-light);
+            --text-color: var(--text-dark);
+            --header-bg: white;
+            --header-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+            --header-gradient-start: var(--primary-light);
+            --header-gradient-end: var(--primary-medium);
+            --card-bg: white;
+            --footer-bg: var(--primary-dark);
+            --footer-text: var(--text-dark);
+            --footer-border: var(--accent-light);
+            --social-icon-bg: var(--primary-light);
+            --social-icon-border: var(--primary-medium);
+            --modal-bg: white;
+            --faq-question-bg: var(--primary-medium);
+            --faq-question-hover-bg: var(--primary-dark);
+            --faq-answer-bg: var(--primary-light);
+        }
+
+        /* Dark Mode Overrides */
+        body.dark-mode {
+            --bg-color: #1E1E1E;
+            --text-color: #F5F5F5;
+            --header-bg: #2A2A2A;
+            --header-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+            --header-gradient-start: #2A2A2A;
+            --header-gradient-end: #3A3A3A;
+            --card-bg: #333333;
+            --footer-bg: #2A2A2A;
+            --footer-text: #F5F5F5;
+            --footer-border: #7B5E42;
+            --social-icon-bg: #444444;
+            --social-icon-border: #555555;
+            --modal-bg: #333333;
+            --faq-question-bg: #3A3A3A;
+            --faq-question-hover-bg: #4A4A4A;
+            --faq-answer-bg: #2A2A2A;
+
+            color: var(--text-color);
+            background-color: var(--bg-color);
         }
 
         * {
@@ -27,9 +68,9 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Default English font */
-            background-color: var(--primary-light);
-            color: var(--text-dark);
-            transition: var(--transition);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.5s ease, color 0.5s ease; /* Smooth transition for dark mode */
             overflow-x: hidden;
             line-height: 1.6; /* Improve readability */
         }
@@ -43,16 +84,17 @@
 
         /* Header Styles */
         header {
-            background-color: white;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15); /* Adjusted shadow */
+            background-color: var(--header-bg);
+            box-shadow: var(--header-shadow);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 100;
-            background-image: linear-gradient(to right, var(--primary-light), var(--primary-medium));
+            background-image: linear-gradient(to right, var(--header-gradient-start), var(--header-gradient-end));
             background-size: 200% 100%;
             animation: headerBackgroundMove 10s linear infinite alternate;
+            transition: background-color 0.5s ease, box-shadow 0.5s ease, background-image 0.5s ease;
         }
 
         .header-container {
@@ -60,7 +102,7 @@
             margin: 0 auto;
             padding: 20px 30px; /* Increased padding */
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* Default for mobile, overridden for desktop */
             align-items: center;
             flex-wrap: wrap; /* Allow items to wrap on smaller screens */
         }
@@ -77,6 +119,8 @@
             margin-left: 10px;
             display: flex;
             flex-direction: column;
+            color: var(--text-color); /* Ensure logo text changes color */
+            transition: color 0.5s ease;
         }
 
         .logo-arabic {
@@ -114,7 +158,7 @@
 
         nav ul li a {
             text-decoration: none;
-            color: var(--text-dark);
+            color: var(--text-color); /* Use text-color variable */
             font-weight: 500;
             transition: var(--transition);
             padding: 8px 0; /* Increased padding */
@@ -132,61 +176,68 @@
             content: none;
         }
 
-        .mobile-menu-btn {
-            display: none; /* Hidden by default on desktop */
-            background: none;
-            border: none;
-            font-size: 28px; /* Increased font size */
-            cursor: pointer;
-        }
-
-        /* Language Switcher */
-        .language-switcher {
-            position: relative;
-            margin-left: 20px;
-        }
-
-        .language-btn {
-            background-color: transparent;
-            border: none;
-            color: var(--text-dark);
-            font-weight: 500;
+        /* New Icon Container */
+        .header-icons {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 15px; /* Space between icons */
+            margin-left: 20px; /* Space from nav links */
+        }
+
+        /* Icon Button Base Styles */
+        .icon-btn {
+            background: none;
+            border: none;
             cursor: pointer;
-            font-size: 18px; /* Increased font size */
+            padding: 5px; /* Add padding for easier clicking */
+            display: flex; /* Ensure icon is centered if it's an image/svg */
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease, transform 0.2s ease; /* Soft hover effect */
         }
 
-        .language-btn span {
-            transition: transform 0.3s ease;
+        .icon-btn:hover {
+            opacity: 0.8; /* Reduced opacity on hover */
+            transform: scale(1.05); /* Slight scale on hover */
         }
 
-        .language-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: white;
-            box-shadow: var(--shadow);
-            border-radius: 5px;
-            padding: 10px 0;
-            display: none;
-            width: 140px; /* Adjusted width */
+        /* Specific Icon Adjustments */
+        .language-toggle-btn img {
+            width: 26px; /* Increased size to match dark mode toggle */
+            height: 26px;
+            filter: invert(0); /* Make it black in light mode */
+            transition: filter 0.5s ease;
         }
 
-        .language-dropdown.show {
-            display: block;
+        body.dark-mode .language-toggle-btn img {
+            filter: invert(0.9) sepia(1) saturate(0.5) hue-rotate(180deg) brightness(1.2); /* Lighter tint for dark mode */
         }
 
-        .language-option {
-            padding: 10px 18px; /* Increased padding */
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 16px; /* Increased font size */
+        .dark-mode-toggle-btn img {
+            width: 30px; /* Size for moon icon */
+            height: 26px;
+            filter: invert(0); /* Brownish tint for light mode */
+            transition: filter 0.5s ease;
         }
 
-        .language-option:hover {
-            background-color: var(--primary-light);
+        body.dark-mode .dark-mode-toggle-btn img {
+            filter: invert(1); /* Lighter tint for dark mode */
+        }
+
+        .mobile-menu-btn {
+            display: none; /* Hidden by default on desktop */
+            font-size: 28px; /* Keep existing size for hamburger */
+            color: #7B5E42; /* Medium brown for hamburger icon */
+            transition: color 0.5s ease;
+        }
+
+        body.dark-mode .mobile-menu-btn {
+            color: var(--text-color); /* Ensure it changes color in dark mode */
+        }
+
+        /* Language Switcher - old one removed */
+        .language-switcher {
+            display: none; /* Hide the old text-based switcher */
         }
 
         /* Hero Section */
@@ -296,11 +347,11 @@
         }
 
         .product-card {
-            background-color: white;
+            background-color: var(--card-bg); /* Use card-bg variable */
             border-radius: 10px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            transition: var(--transition);
+            transition: var(--transition), background-color 0.5s ease;
             opacity: 0;
             animation: fadeIn 1s ease forwards;
             animation-delay: calc(var(--order) * 0.1s);
@@ -336,6 +387,8 @@
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 10px;
+            color: var(--text-color); /* Ensure title changes color */
+            transition: color 0.5s ease;
         }
 
         .product-price {
@@ -397,11 +450,18 @@
         .about-text p {
             margin-bottom: 15px;
             line-height: 1.6;
+            color: var(--text-color); /* Ensure paragraph text changes color */
+            transition: color 0.5s ease;
         }
 
         /* Testimonials */
         .testimonials {
             background-color: var(--primary-medium);
+            transition: background-color 0.5s ease;
+        }
+
+        body.dark-mode .testimonials {
+            background-color: #2A2A2A; /* Dark mode specific for testimonials */
         }
 
         .testimonial-grid {
@@ -413,7 +473,7 @@
         }
 
         .testimonial-card {
-            background-color: white;
+            background-color: var(--card-bg); /* Use card-bg variable */
             padding: 30px;
             border-radius: 10px;
             box-shadow: var(--shadow);
@@ -421,6 +481,7 @@
             animation: fadeInUp 1.5s ease forwards;
             animation-delay: calc(var(--order) * 0.1s);
             text-align: left; /* Default LTR alignment */
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
 
         .testimonial-text {
@@ -453,10 +514,11 @@
 
         /* Footer */
         footer {
-            background-color: var(--primary-dark); /* Changed background color */
-            color: var(--text-dark); /* Changed text color to black */
+            background-color: var(--footer-bg); /* Use footer-bg variable */
+            color: var(--footer-text); /* Use footer-text variable */
             padding: 80px 30px 40px; /* Increased padding */
-            border-top: 5px solid var(--accent-light); /* Added a top border */
+            border-top: 5px solid var(--footer-border); /* Use footer-border variable */
+            transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
         }
 
         .footer-container {
@@ -476,7 +538,8 @@
 
         .footer-logo .logo-text {
             font-size: 30px; /* Increased font size */
-            color: var(--text-dark); /* Ensure logo text is dark */
+            color: var(--footer-text); /* Ensure logo text is dark */
+            transition: color 0.5s ease;
         }
 
         .footer-logo .logo-english {
@@ -504,13 +567,13 @@
             width: 30px; /* Increased size */
             height: 30px; /* Increased size */
             border-radius: 50%;
-            background-color: var(--primary-light); /* Changed background color */
+            background-color: var(--social-icon-bg); /* Use social-icon-bg variable */
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: var(--transition);
+            transition: var(--transition), background-color 0.5s ease, border-color 0.5s ease;
             font-size: 20px; /* Increased font size for icon text */
-            border: 1px solid var(--primary-medium); /* Adjusted border color */
+            border: 1px solid var(--social-icon-border); /* Use social-icon-border variable */
         }
 
         .social-icon:hover {
@@ -551,9 +614,9 @@
         }
 
         .footer-links ul li a {
-            color: var(--text-dark); /* Ensure links are dark */
+            color: var(--footer-text); /* Ensure links are dark */
             text-decoration: none;
-            transition: var(--transition);
+            transition: var(--transition), color 0.5s ease;
             font-size: 17px; /* Increased font size */
         }
 
@@ -581,6 +644,11 @@
             padding-top: 30px; /* Increased padding */
             border-top: 1px solid rgba(0, 0, 0, 0.2); /* Adjusted border to be dark */
             font-size: 16px; /* Increased font size */
+            transition: border-color 0.5s ease;
+        }
+
+        body.dark-mode .copyright {
+            border-color: rgba(255, 255, 255, 0.2); /* Lighter border in dark mode */
         }
 
         /* Product Modal */
@@ -606,7 +674,7 @@
         }
 
         .modal {
-            background-color: white;
+            background-color: var(--modal-bg); /* Use modal-bg variable */
             border-radius: 10px;
             width: 90%;
             max-width: 900px;
@@ -616,7 +684,7 @@
             grid-template-columns: 1fr 1fr;
             position: relative;
             transform: translateY(50px);
-            transition: var(--transition);
+            transition: var(--transition), background-color 0.5s ease;
         }
 
         .modal-overlay.active .modal {
@@ -640,6 +708,8 @@
         .modal-content {
             padding: 40px;
             text-align: left; /* Default LTR alignment */
+            color: var(--text-color); /* Ensure modal content text changes color */
+            transition: color 0.5s ease;
         }
 
         .modal-close {
@@ -650,8 +720,8 @@
             border: none;
             font-size: 24px;
             cursor: pointer;
-            color: var(--text-dark);
-            transition: var(--transition);
+            color: var(--text-color); /* Ensure close button changes color */
+            transition: var(--transition), color 0.5s ease;
             z-index: 10;
         }
 
@@ -748,6 +818,11 @@
             transition: var(--transition);
             padding: 20px;
             text-align: center; /* Keep overlay text centered */
+        }
+
+        body.dark-mode .product-overlay {
+            background-color: rgba(51, 51, 51, 0.9); /* Darker overlay in dark mode */
+            color: var(--text-light);
         }
 
         .product-card:hover .product-overlay {
@@ -872,6 +947,28 @@
         }
 
         /* Responsive Styles */
+        @media (min-width: 769px) {
+            .header-container {
+                justify-content: flex-start; /* Align items to start */
+                gap: 40px; /* Space between logo, nav, and icons */
+            }
+
+            nav {
+                flex: 1; /* Allow nav to take up available space */
+                justify-content: center; /* Center the ul within nav */
+                margin: 0; /* Remove any default margins */
+            }
+
+            nav ul {
+                justify-content: center; /* Ensure links are centered */
+                width: 100%; /* Take full width of nav */
+            }
+
+            .header-icons {
+                margin-left: auto; /* Push icons to the far right */
+            }
+        }
+
         @media (max-width: 992px) {
             .about-container {
                 grid-template-columns: 1fr; /* Stack on tablets and smaller */
@@ -926,13 +1023,13 @@
                 margin: 0 20px; /* Add some side margin */
                 z-index: 99; /* Ensure it's above content but below header */
                 flex-direction: column;
-                background-color: white;
+                background-color: var(--header-bg); /* Use header-bg for mobile nav */
                 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
                 border-radius: 8px;
                 padding: 15px 0;
                 display: none; /* Hidden by default on mobile */
                 transform: translateX(100%); /* Start off-screen right */
-                transition: transform 0.3s ease-out; /* Smooth slide transition */
+                transition: transform 0.3s ease-out, background-color 0.5s ease;
             }
 
             nav.show {
@@ -958,16 +1055,18 @@
                 border-radius: 5px;
             }
 
-            .mobile-menu-btn {
-                display: block; /* Show on smaller screens */
-                order: 3; /* Position button after logo and language switcher */
-                margin-left: auto; /* Push to the right */
+            body.dark-mode nav ul li a:hover {
+                background-color: #4A4A4A; /* Dark mode hover for mobile nav */
             }
 
-            .language-switcher {
-                order: 2; /* Position after logo */
-                margin-left: auto; /* Push language switcher to the right */
-                margin-right: 10px; /* Add some space */
+            .header-icons {
+                order: 3; /* Position icons after logo and nav (when nav is hidden) */
+                margin-left: auto; /* Push to the right */
+                gap: 10px; /* Smaller gap for mobile icons */
+            }
+
+            .mobile-menu-btn {
+                display: block; /* Show on smaller screens */
             }
             
             .hero {
@@ -1050,8 +1149,12 @@
                 font-size: 20px;
             }
 
-            .language-btn {
-                font-size: 16px;
+            .header-icons {
+                gap: 8px; /* Even smaller gap for very small screens */
+            }
+
+            .icon-btn {
+                font-size: 24px; /* Smaller icons on very small screens */
             }
 
             nav {
@@ -1220,18 +1323,10 @@
             border-color: var(--accent-dark); /* Keep border on hover */
         }
 
-        body.rtl .language-switcher {
-            margin-left: 0;
-            margin-right: 20px; /* Adjust margin for RTL */
-        }
-
-        body.rtl .language-dropdown {
-            left: 0; /* Align dropdown to the left in RTL */
-            right: auto;
-        }
-
-        body.rtl .language-btn span {
-            transform: rotate(180deg); /* Flip dropdown arrow for RTL */
+        body.rtl .header-icons {
+            margin-left: auto; /* Push icons to the left in RTL */
+            margin-right: 0;
+            flex-direction: row-reverse; /* Reverse order of icons for RTL */
         }
 
         body.rtl .section-title h2::after {
@@ -1321,16 +1416,11 @@
                 margin-right: auto; /* Push to the left */
             }
 
-            body.rtl .language-switcher {
-                order: 2; /* Keep language switcher in the middle */
-                margin-left: 10px; /* Adjust spacing */
-                margin-right: 10px; /* Adjust spacing */
-            }
-
-            body.rtl .mobile-menu-btn {
-                order: 3; /* Move mobile menu button to the right in RTL mobile */
+            body.rtl .header-icons {
+                order: 3; /* Move icons to the right in RTL mobile */
                 margin-left: auto; /* Push to the right */
                 margin-right: 0;
+                flex-direction: row-reverse; /* Keep icons in order [☰] [🌙] [🌐] from left to right */
             }
 
             body.rtl nav {
@@ -1423,28 +1513,29 @@
         }
 
         .faq-item {
-            background-color: white;
+            background-color: var(--card-bg); /* Use card-bg variable */
             border-radius: 10px;
             margin-bottom: 20px;
             box-shadow: var(--shadow);
             overflow: hidden;
+            transition: background-color 0.5s ease;
         }
 
         .faq-question {
             padding: 20px 30px;
-            background-color: var(--primary-medium);
-            color: var(--text-dark);
+            background-color: var(--faq-question-bg); /* Use faq-question-bg variable */
+            color: var(--text-color); /* Use text-color variable */
             font-size: 20px;
             font-weight: bold;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.5s ease;
         }
 
         .faq-question:hover {
-            background-color: var(--primary-dark);
+            background-color: var(--faq-question-hover-bg); /* Use faq-question-hover-bg variable */
         }
 
         .faq-question .icon {
@@ -1458,13 +1549,13 @@
 
         .faq-answer {
             padding: 0 30px;
-            background-color: var(--primary-light);
-            color: var(--text-dark);
+            background-color: var(--faq-answer-bg); /* Use faq-answer-bg variable */
+            color: var(--text-color); /* Use text-color variable */
             font-size: 17px;
             line-height: 1.6;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out, background-color 0.5s ease, color 0.5s ease;
         }
 
         .faq-answer.active {
@@ -1541,18 +1632,15 @@
                 </ul>
             </nav>
             
-            <div class="language-switcher">
-                <button class="language-btn">
-                    English
-                    <span>▼</span>
+            <div class="header-icons">
+                <button class="icon-btn language-toggle-btn" id="language-toggle-btn">
+                    <img src="https://icon-library.com/images/website-icon-vector/website-icon-vector-8.jpg" alt="Language Icon">
                 </button>
-                <div class="language-dropdown">
-                    <div class="language-option" onclick="changeLanguageAndClose('en')">English</div>
-                    <div class="language-option" onclick="changeLanguageAndClose('ar')">العربية</div>
-                </div>
+                <button class="icon-btn dark-mode-toggle-btn" id="dark-mode-toggle-btn">
+                    <img src="https://cdn2.iconfinder.com/data/icons/canoopi-mobile-contact-apps/32/Dark_Theme-512.png" alt="Dark Mode Icon">
+                </button>
+                <button class="icon-btn mobile-menu-btn">☰</button>
             </div>
-            
-            <button class="mobile-menu-btn">☰</button>
         </div>
     </header>
     
@@ -1922,7 +2010,7 @@
                     <li><a href="#about" data-en="About Us" data-ar="عنا">About Us</a></li>
                     <li><a href="#testimonials" data-en="Testimonials" data-ar="الشهادات">Testimonials</a></li>
                     <li><a href="#contact" data-en="Contact" data-ar="اتصل بنا">Contact</a></li>
-                    <li><a href="#faq" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</a></li>
+                    <li><a href="#faq" data-en="FAQ" data-ar="الأسئلة الشائقة">FAQ</a></li>
                 </ul>
             </div>
             
@@ -2396,7 +2484,7 @@
                 'nav-contact': 'Contact',
                 'nav-faq': 'FAQ',
 
-                'lang-btn': 'English',
+                'lang-btn': 'English', // This is no longer used for the button text, but kept for consistency
 
                 // Hero Section
                 'hero-title': 'Modern Minimalist Furniture for Your Home',
@@ -2427,7 +2515,7 @@
 
                 // Footer
                 'footer-logo-english': 'Moreh',
-               // 'footer-logo-arabic': 'مريح',
+               // 'footer-logo-arabic': 'مريح', // This was commented out in original, keeping it consistent
                 'footer-about-text': 'Modern minimalist furniture combining sleek design with exceptional functionality for discerning homeowners.',
                 'footer-links-heading': 'Quick Links',
                 'footer-contact-heading': 'Contact Us',
@@ -2448,7 +2536,7 @@
                 'nav-testimonials': 'الشهادات',
                 'nav-contact': 'اتصل بنا',
                 'nav-faq': 'الأسئلة الشائعة',
-                'lang-btn': 'العربية',
+                'lang-btn': 'العربية', // This is no longer used for the button text, but kept for consistency
 
                 // Hero Section
                 'hero-title': 'أثاث عصري بسيط لمنزلك',
@@ -2479,7 +2567,7 @@
 
                 // Footer
                 'footer-logo-english': 'Moreh',
-                'footer-logo-arabic': '', // Keep this empty to only show "Moreh"
+                'footer-logo-arabic': '', // This was commented out in original, keeping it consistent
                 'footer-about-text': 'أثاث عصري بسيط يجمع بين التصميم الأنيق والوظائف الاستثنائية لأصحاب المنازل المميزين.',
                 'footer-links-heading': 'روابط سريعة',
                 'footer-contact-heading': 'اتصل بنا',
@@ -2490,18 +2578,22 @@
             }
         };
 
-        // Function to close the language dropdown
+        // Function to close the language dropdown (no longer needed for icon-based switcher)
         function closeLanguageDropdown() {
-            document.querySelector('.language-dropdown').classList.remove('show');
+            // This function is now effectively deprecated as the dropdown is removed.
+            // Kept as a placeholder if future dropdowns are added.
         }
 
         // Modified changeLanguage function to also close the dropdown
         function changeLanguageAndClose(lang) {
             changeLanguage(lang); // Call the original language change function
-            closeLanguageDropdown(); // Close the dropdown
+            closeLanguageDropdown(); // Close the dropdown (if it existed)
         }
 
+        let currentLanguage = 'en'; // Track current language
+
         function changeLanguage(lang) {
+            currentLanguage = lang; // Update current language tracker
             const currentTranslations = translations[lang];
 
             // Set body direction and font-family
@@ -2513,20 +2605,17 @@
                 document.body.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
             }
 
-            // Update language button
-            document.querySelector('.language-btn').innerHTML = `${currentTranslations['lang-btn']} <span>▼</span>`;
-
             // Update Header Logo
             document.getElementById('header-logo-english').textContent = currentTranslations['header-logo-english'];
             document.getElementById('header-logo-arabic').textContent = currentTranslations['header-logo-arabic'];
 
             // Update Header Navigation
-            document.querySelector('nav ul li a[href="#"]').textContent = currentTranslations['nav-home'];
-            document.querySelector('nav ul li a[href="#products"]').textContent = currentTranslations['nav-products'];
-            document.querySelector('nav ul li a[href="#about"]').textContent = currentTranslations['nav-about'];
-            document.querySelector('nav ul li a[href="#testimonials"]').textContent = currentTranslations['nav-testimonials'];
-            document.querySelector('nav ul li a[href="#contact"]').textContent = currentTranslations['nav-contact'];
-            document.querySelector('nav ul li a[href="#faq"]').textContent = currentTranslations['nav-faq'];
+            document.querySelector('nav ul li a[data-en="Home"]').textContent = currentTranslations['nav-home'];
+            document.querySelector('nav ul li a[data-en="Products"]').textContent = currentTranslations['nav-products'];
+            document.querySelector('nav ul li a[data-en="About Us"]').textContent = currentTranslations['nav-about'];
+            document.querySelector('nav ul li a[data-en="Testimonials"]').textContent = currentTranslations['nav-testimonials'];
+            document.querySelector('nav ul li a[data-en="Contact"]').textContent = currentTranslations['nav-contact'];
+            document.querySelector('nav ul li a[data-en="FAQ"]').textContent = currentTranslations['nav-faq'];
 
 
             // Update Hero Section
@@ -2572,6 +2661,9 @@
             document.querySelectorAll('.footer-links ul li a').forEach(link => {
                 link.textContent = link.dataset[lang];
             });
+
+            // Update product titles and descriptions in modals (if they were translated)
+            // For now, these are hardcoded in the HTML, so no JS update needed unless translations are added to data attributes.
         }
         
         // Modal Functions
@@ -2856,26 +2948,34 @@
             animate();
         });
 
-        // Initial language setting
+        // Initial language and dark mode setting
         document.addEventListener('DOMContentLoaded', () => {
-            changeLanguage('en');
-
-            // Language Switcher Toggle
-            const languageBtn = document.querySelector('.language-btn');
-            const languageDropdown = document.querySelector('.language-dropdown');
-            const languageSwitcher = document.querySelector('.language-switcher');
-
-            languageBtn.addEventListener('click', (event) => {
-                languageDropdown.classList.toggle('show');
-                event.stopPropagation(); // Prevent this click from immediately closing the dropdown via the document listener
+            // Language Toggle
+            const languageToggleBtn = document.getElementById('language-toggle-btn');
+            languageToggleBtn.addEventListener('click', () => {
+                const newLang = currentLanguage === 'en' ? 'ar' : 'en';
+                changeLanguage(newLang);
+                localStorage.setItem('morehLang', newLang); // Save language preference
             });
 
-            // Close dropdown when clicking outside
-            document.addEventListener('click', (event) => {
-                if (!languageSwitcher.contains(event.target)) {
-                    closeLanguageDropdown();
-                }
+            // Dark Mode Toggle
+            const darkModeToggleBtn = document.getElementById('dark-mode-toggle-btn');
+            darkModeToggleBtn.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                localStorage.setItem('morehDarkMode', isDarkMode); // Save dark mode preference
             });
+
+            // Load preferences on page load
+            const savedLang = localStorage.getItem('morehLang') || 'en';
+            changeLanguage(savedLang);
+
+            const savedDarkMode = localStorage.getItem('morehDarkMode');
+            if (savedDarkMode === 'true') {
+                document.body.classList.add('dark-mode');
+            } else if (savedDarkMode === 'false') {
+                document.body.classList.remove('dark-mode');
+            }
 
             // FAQ Accordion Logic
             document.querySelectorAll('.faq-question').forEach(question => {
