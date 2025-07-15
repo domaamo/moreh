@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moreh - مريح | Modern Minimalist Furniture</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> <!-- Added AOS CSS -->
     <style>
         /* Base Styles */
         :root {
@@ -367,8 +368,8 @@
         .section-title {
             text-align: center; /* Keep section titles centered */
             margin-bottom: 50px; /* Consistent margin below titles */
-            opacity: 0;
-            animation: fadeIn 1s ease forwards;
+            /* opacity: 0; */ /* Removed as AOS will handle initial opacity */
+            /* animation: fadeIn 1s ease forwards; */ /* Removed as AOS will handle animation */
         }
 
         .section-title h2 {
@@ -403,9 +404,9 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition), background-color 0.5s ease;
-            opacity: 0;
-            animation: fadeIn 1s ease forwards;
-            animation-delay: calc(var(--order) * 0.1s);
+            /* opacity: 0; */ /* Removed as AOS will handle initial opacity */
+            /* animation: fadeIn 1s ease forwards; */ /* Removed as AOS will handle animation */
+            /* animation-delay: calc(var(--order) * 0.1s); */ /* Removed as AOS will handle delay */
         }
 
         .product-card:hover {
@@ -487,8 +488,8 @@
         }
 
         .about-text {
-            opacity: 0;
-            animation: fadeInLeft 1s ease forwards;
+            /* opacity: 0; */ /* Removed as AOS will handle initial opacity */
+            /* animation: fadeInLeft 1s ease forwards; */ /* Removed as AOS will handle animation */
             text-align: left; /* Default LTR alignment */
         }
 
@@ -528,9 +529,9 @@
             padding: 30px;
             border-radius: 10px;
             box-shadow: var(--shadow);
-            opacity: 0;
-            animation: fadeInUp 1.5s ease forwards;
-            animation-delay: calc(var(--order) * 0.1s);
+            /* opacity: 0; */ /* Removed as AOS will handle initial opacity */
+            /* animation: fadeInUp 1.5s ease forwards; */ /* Removed as AOS will handle animation */
+            /* animation-delay: calc(var(--order) * 0.1s); */ /* Removed as AOS will handle delay */
             text-align: left; /* Default LTR alignment */
             transition: background-color 0.5s ease, color 0.5s ease;
         }
@@ -1746,14 +1747,15 @@
     </section>
     
     <section id="products">
-        <div class="section-title">
+        <div class="section-title" data-aos="fade-up" data-aos-duration="700"> <!-- Added AOS -->
             <h2 id="products-section-title">Our Minimalist Collection - مجموعتنا البسيطة</h2>
         </div>
         
         <div class="products-grid">
             <!-- Product 1: Minimalist Sectional Sofa -->
             <div class="product-card" style="--order: 1;" onclick="openModal('product1')"
-                 data-images="sofra/1.jpg, sofra/2.jpg, sofra/3.jpg, sofra/4.jpg, sofra/5.jpg, sofra/6.jpg, sofra/7.jpg, sofra/8.jpg">
+                 data-images="sofra/1.jpg, sofra/2.jpg, sofra/3.jpg, sofra/4.jpg, sofra/5.jpg, sofra/6.jpg, sofra/7.jpg, sofra/8.jpg"
+                 data-aos="fade-up" data-aos-delay="100" data-aos-duration="600"> <!-- Added AOS -->
                 <div class="product-image">
                     <img src="sofra/1.jpg" alt="Minimalist Sectional Sofa in light grey" />
                 </div>
@@ -1771,7 +1773,8 @@
             
             <!-- Product 2: Modern Dining Set -->
             <div class="product-card" style="--order: 2;" onclick="openModal('product2')"
-                 data-images="panda/1.jpg, panda/2.jpg, panda/3.jpg, panda/4.jpg, panda/5.jpg">
+                 data-images="panda/1.jpg, panda/2.jpg, panda/3.jpg, panda/4.jpg, panda/5.jpg"
+                 data-aos="fade-up" data-aos-delay="200" data-aos-duration="600"> <!-- Added AOS -->
                 <div class="product-image">
                     <img src="panda/1.jpg" alt="Modern Dining Set with natural wood table" />
                 </div>
@@ -1789,7 +1792,8 @@
             
             <!-- Product 3: Minimalist Extendable Dining Table -->
             <div class="product-card" style="--order: 3;" onclick="openModal('product3')"
-                 data-images="https://via.placeholder.com/600x400/F5F5F5/333333?text=Extendable+Table+1, https://via.placeholder.com/600x400/F5F5F5/333333?text=Extendable+Table+2, https://via.placeholder.com/600x400/F5F5F5/333333?text=Extendable+Table+3">
+                 data-images="https://via.placeholder.com/600x400/F5F5F5/333333?text=Extendable+Table+1, https://via.placeholder.com/600x400/F5F5F5/333333?text=Extendable+Table+2, https://via.placeholder.com/600x400/F5F5F5/333333?text=Extendable+Table+3"
+                 data-aos="fade-up" data-aos-delay="300" data-aos-duration="600"> <!-- Added AOS -->
                 <div class="product-image">
                     <img src="https://via.placeholder.com/600x400/F5F5F5/333333?text=Extendable+Table" alt="Minimalist Extendable Dining Table" />
                 </div>
@@ -1807,7 +1811,8 @@
             
             <!-- Product 4: Platform Bed with Integrated Headboard -->
             <div class="product-card" style="--order: 4;" onclick="openModal('product4')"
-                 data-images="https://via.placeholder.com/600x400/F5F5F5/333333?text=Platform+Bed+1, https://via.placeholder.com/600x400/F5F5F5/333333?text=Platform+Bed+2, https://via.placeholder.com/600x400/F5F5F5/333333?text=Platform+Bed+3">
+                 data-images="https://via.placeholder.com/600x400/F5F5F5/333333?text=Platform+Bed+1, https://via.placeholder.com/600x400/F5F5F5/333333?text=Platform+Bed+2, https://via.placeholder.com/600x400/F5F5F5/333333?text=Platform+Bed+3"
+                 data-aos="fade-up" data-aos-delay="400" data-aos-duration="600"> <!-- Added AOS -->
                 <div class="product-image">
                     <img src="https://via.placeholder.com/600x400/F5F5F5/333333?text=Platform+Bed" alt="Platform Bed with Integrated Headboard" />
                 </div>
@@ -1825,7 +1830,8 @@
             
             <!-- Product 5: Modular Open Bookshelf -->
             <div class="product-card" style="--order: 5;" onclick="openModal('product5')"
-                 data-images="https://via.placeholder.com/600x400/F5F5F5/333333?text=Modular+Bookshelf+1, https://via.placeholder.com/600x400/F5F5F5/333333?text=Modular+Bookshelf+2, https://via.placeholder.com/600x400/F5F5F5/333333?text=Modular+Bookshelf+3">
+                 data-images="https://via.placeholder.com/600x400/F5F5F5/333333?text=Modular+Bookshelf+1, https://via.placeholder.com/600x400/F5F5F5/333333?text=Modular+Bookshelf+2, https://via.placeholder.com/600x400/F5F5F5/333333?text=Modular+Bookshelf+3"
+                 data-aos="fade-up" data-aos-delay="500" data-aos-duration="600"> <!-- Added AOS -->
                 <div class="product-image">
                     <img src="https://via.placeholder.com/600x400/F5F5F5/333333?text=Modular+Bookshelf" alt="Modular Open Bookshelf" />
                 </div>
@@ -1843,7 +1849,8 @@
             
             <!-- Product 6: Accent Armchair -->
             <div class="product-card" style="--order: 6;" onclick="openModal('product6')"
-                 data-images="https://via.placeholder.com/600x400/F5F5F5/333333?text=Accent+Armchair+1, https://via.placeholder.com/600x400/F5F5F5/333333?text=Accent+Armchair+2, https://via.placeholder.com/600x400/F5F5F5/333333?text=Accent+Armchair+3">
+                 data-images="https://via.placeholder.com/600x400/F5F5F5/333333?text=Accent+Armchair+1, https://via.placeholder.com/600x400/F5F5F5/333333?text=Accent+Armchair+2, https://via.placeholder.com/600x400/F5F5F5/333333?text=Accent+Armchair+3"
+                 data-aos="fade-up" data-aos-delay="600" data-aos-duration="600"> <!-- Added AOS -->
                 <div class="product-image">
                     <img src="https://via.placeholder.com/600x400/F5F5F5/333333?text=Accent+Armchair" alt="Accent Armchair in navy blue" />
                 </div>
@@ -1861,7 +1868,8 @@
 
             <!-- Product 7: Geometric Coffee Table -->
             <div class="product-card" style="--order: 7;" onclick="openModal('product7')"
-                 data-images="https://via.placeholder.com/600x400/F5F5F5/333333?text=Geometric+Table+1, https://via.placeholder.com/600x400/F5F5F5/333333?text=Geometric+Table+2, https://via.placeholder.com/600x400/F5F5F5/333333?text=Geometric+Table+3">
+                 data-images="https://via.placeholder.com/600x400/F5F5F5/333333?text=Geometric+Table+1, https://via.placeholder.com/600x400/F5F5F5/333333?text=Geometric+Table+2, https://via.placeholder.com/600x400/F5F5F5/333333?text=Geometric+Table+3"
+                 data-aos="fade-up" data-aos-delay="100" data-aos-duration="600"> <!-- Added AOS -->
                 <div class="product-image">
                     <img src="https://via.placeholder.com/600x400/F5F5F5/333333?text=Geometric+Table" alt="Geometric Coffee Table with glass top" />
                 </div>
@@ -1879,7 +1887,8 @@
 
             <!-- Product 8: Minimalist Arc Floor Lamp -->
             <div class="product-card" style="--order: 8;" onclick="openModal('product8')"
-                 data-images="https://via.placeholder.com/600x400/F5F5F5/333333?text=Arc+Lamp+1, https://via.placeholder.com/600x400/F5F5F5/333333?text=Arc+Lamp+2, https://via.placeholder.com/600x400/F5F5F5/333333?text=Arc+Lamp+3">
+                 data-images="https://via.placeholder.com/600x400/F5F5F5/333333?text=Arc+Lamp+1, https://via.placeholder.com/600x400/F5F5F5/333333?text=Arc+Lamp+2, https://via.placeholder.com/600x400/F5F5F5/333333?text=Arc+Lamp+3"
+                 data-aos="fade-up" data-aos-delay="200" data-aos-duration="600"> <!-- Added AOS -->
                 <div class="product-image">
                     <img src="https://via.placeholder.com/600x400/F5F5F5/333333?text=Arc+Lamp" alt="Minimalist Arc Floor Lamp" />
                 </div>
@@ -1897,7 +1906,8 @@
 
             <!-- Product 9: Ergonomic Task Chair -->
             <div class="product-card" style="--order: 9;" onclick="openModal('product9')"
-                 data-images="https://via.placeholder.com/600x400/F5F5F5/333333?text=Task+Chair+1, https://via.placeholder.com/600x400/F5F5F5/333333?text=Task+Chair+2, https://via.placeholder.com/600x400/F5F5F5/333333?text=Task+Chair+3">
+                 data-images="https://via.placeholder.com/600x400/F5F5F5/333333?text=Task+Chair+1, https://via.placeholder.com/600x400/F5F5F5/333333?text=Task+Chair+2, https://via.placeholder.com/600x400/F5F5F5/333333?text=Task+Chair+3"
+                 data-aos="fade-up" data-aos-delay="300" data-aos-duration="600"> <!-- Added AOS -->
                 <div class="product-image">
                     <img src="https://via.placeholder.com/600x400/F5F5F5/333333?text=Task+Chair" alt="Ergonomic Task Chair" />
                 </div>
@@ -1915,7 +1925,8 @@
 
             <!-- Product 10: Slim Entryway Console -->
             <div class="product-card" style="--order: 10;" onclick="openModal('product10')"
-                 data-images="https://via.placeholder.com/600x400/F5F5F5/333333?text=Console+Table+1, https://via.placeholder.com/600x400/F5F5F5/333333?text=Console+Table+2, https://via.placeholder.com/600x400/F5F5F5/333333?text=Console+Table+3">
+                 data-images="https://via.placeholder.com/600x400/F5F5F5/333333?text=Console+Table+1, https://via.placeholder.com/600x400/F5F5F5/333333?text=Console+Table+2, https://via.placeholder.com/600x400/F5F5F5/333333?text=Console+Table+3"
+                 data-aos="fade-up" data-aos-delay="400" data-aos-duration="600"> <!-- Added AOS -->
                 <div class="product-image">
                     <img src="https://via.placeholder.com/600x400/F5F5F5/333333?text=Console+Table" alt="Slim Entryway Console" />
                 </div>
@@ -1933,7 +1944,8 @@
 
             <!-- Product 11: Outdoor Lounge Set -->
             <div class="product-card" style="--order: 11;" onclick="openModal('product11')"
-                 data-images="https://via.placeholder.com/600x400/F5F5F5/333333?text=Outdoor+Lounge+1, https://via.placeholder.com/600x400/F5F5F5/333333?text=Outdoor+Lounge+2, https://via.placeholder.com/600x400/F5F5F5/333333?text=Outdoor+Lounge+3">
+                 data-images="https://via.placeholder.com/600x400/F5F5F5/333333?text=Outdoor+Lounge+1, https://via.placeholder.com/600x400/F5F5F5/333333?text=Outdoor+Lounge+2, https://via.placeholder.com/600x400/F5F5F5/333333?text=Outdoor+Lounge+3"
+                 data-aos="fade-up" data-aos-delay="500" data-aos-duration="600"> <!-- Added AOS -->
                 <div class="product-image">
                     <img src="https://via.placeholder.com/600x400/F5F5F5/333333?text=Outdoor+Lounge" alt="Outdoor Lounge Set" />
                 </div>
@@ -1951,7 +1963,8 @@
 
             <!-- Product 12: Minimalist Sliding Door Wardrobe -->
             <div class="product-card" style="--order: 12;" onclick="openModal('product12')"
-                 data-images="https://via.placeholder.com/600x400/F5F5F5/333333?text=Sliding+Wardrobe+1, https://via.placeholder.com/600x400/F5F5F5/333333?text=Sliding+Wardrobe+2, https://via.placeholder.com/600x400/F5F5F5/333333?text=Sliding+Wardrobe+3">
+                 data-images="https://via.placeholder.com/600x400/F5F5F5/333333?text=Sliding+Wardrobe+1, https://via.placeholder.com/600x400/F5F5F5/333333?text=Sliding+Wardrobe+2, https://via.placeholder.com/600x400/F5F5F5/333333?text=Sliding+Wardrobe+3"
+                 data-aos="fade-up" data-aos-delay="600" data-aos-duration="600"> <!-- Added AOS -->
                 <div class="product-image">
                     <img src="https://via.placeholder.com/600x400/F5F5F5/333333?text=Sliding+Wardrobe" alt="Minimalist Sliding Door Wardrobe" />
                 </div>
@@ -1970,15 +1983,15 @@
     </section>
     
     <section id="about" class="about-section">
-        <div class="section-title">
+        <div class="section-title" data-aos="fade-up" data-aos-duration="700"> <!-- Added AOS -->
             <h2 id="about-section-title">About Moreh - عن مريح</h2>
         </div>
         
         <div class="about-container">
-            <div class="about-image">
+            <div class="about-image" data-aos="fade-right" data-aos-duration="700"> <!-- Added AOS -->
                 <img src="images/showroom.jpg" alt="Moreh furniture showroom with elegant displays" />
             </div>
-            <div class="about-text">
+            <div class="about-text" data-aos="fade-left" data-aos-duration="700"> <!-- Added AOS -->
                 <h3 id="about-heading">Crafting Modern Comfort Since 2025</h3>
                 <p id="about-paragraph1">Founded in Egypt in 2025, Moreh has become synonymous with modern minimalist furniture that combines sleek design with exceptional functionality.</p>
                 <p id="about-paragraph2">Our name "Moreh" (مريح) means "comfortable" in Arabic, reflecting our commitment to creating furniture that enhances your living space with both style and comfort, all within a coherent minimalist aesthetic.</p>
@@ -1989,12 +2002,12 @@
     </section>
     
     <section id="testimonials" class="testimonials">
-        <div class="section-title">
+        <div class="section-title" data-aos="fade-up" data-aos-duration="700"> <!-- Added AOS -->
             <h2>What Our Customers Say</h2>
         </div>
         
         <div class="testimonial-grid">
-            <div class="testimonial-card" style="--order: 1;">
+            <div class="testimonial-card" style="--order: 1;" data-aos="fade-up" data-aos-delay="100" data-aos-duration="600"> <!-- Added AOS -->
                 <p class="testimonial-text">"The Moreh sectional sofa perfectly fits our modern apartment. The design is so clean, and it's surprisingly comfortable. Highly recommend!"</p>
                 <div class="testimonial-author">
                     <img src="images/esraa.jpg" alt="Esraa, satisfied customer" />
@@ -2005,7 +2018,7 @@
                 </div>
             </div>
             
-            <div class="testimonial-card" style="--order: 2;">
+            <div class="testimonial-card" style="--order: 2;" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600"> <!-- Added AOS -->
                 <p class="testimonial-text">"We love our new Moreh dining set. It's elegant, sturdy, and the minimalist design really elevates our dining area. Fantastic quality!"</p>
                 <div class="testimonial-author">
                     <img src="images/adham.jpg" alt="Adham, happy client" />
@@ -2016,7 +2029,7 @@
                 </div>
             </div>
             
-            <div class="testimonial-card" style="--order: 3;">
+            <div class="testimonial-card" style="--order: 3;" data-aos="fade-up" data-aos-delay="300" data-aos-duration="600"> <!-- Added AOS -->
                 <p class="testimonial-text">"The platform bed from Moreh is exactly what we were looking for. Simple, chic, and incredibly well-made. It completed our minimalist bedroom."</p>
                 <div class="testimonial-author">
                     <img src="images/mariam.jpg" alt="Mariam, delighted customer" />
@@ -2031,11 +2044,11 @@
 
     <!-- FAQ Section -->
     <section id="faq">
-        <div class="section-title">
+        <div class="section-title" data-aos="fade-up" data-aos-duration="700"> <!-- Added AOS -->
             <h2 id="faq-section-title">الأسئلة الشائعة - Frequently Asked Questions</h2>
         </div>
         <div class="faq-container">
-            <div class="faq-item">
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="100" data-aos-duration="600"> <!-- Added AOS -->
                 <div class="faq-question" data-en="Is delivery available to all governorates?" data-ar="📦 هل التوصيل متاح لكل المحافظات؟">
                     <span>📦 هل التوصيل متاح لكل المحافظات؟</span>
                     <span class="icon">▼</span>
@@ -2044,7 +2057,7 @@
                     نعم، بنوفر خدمة التوصيل لجميع محافظات مصر خلال 3 إلى 7 أيام عمل حسب المنطقة.
                 </div>
             </div>
-            <div class="faq-item">
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600"> <!-- Added AOS -->
                 <div class="faq-question" data-en="Can I request a specific color?" data-ar="🎨 هل ممكن اطلب لون معين؟">
                     <span>🎨 هل ممكن اطلب لون معين؟</span>
                     <span class="icon">▼</span>
@@ -2053,7 +2066,7 @@
                     أيوه، نقدر ننفذ اللون حسب رغبه العميل.
                 </div>
             </div>
-            <div class="faq-item">
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="300" data-aos-duration="600"> <!-- Added AOS -->
                 <div class="faq-question" data-en="Can I request different sizes?" data-ar="📏 هل ممكن أطلب مقاسات مختلفة؟">
                     <span>📏 هل ممكن أطلب مقاسات مختلفة؟</span>
                     <span class="icon">▼</span>
@@ -2062,7 +2075,7 @@
                     طبعًا، في بعض القطع بنوفر فيها تخصيص المقاسات حسب رغبة العميل.
                 </div>
             </div>
-            <div class="faq-item">
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="400" data-aos-duration="600"> <!-- Added AOS -->
                 <div class="faq-question" data-en="How can I contact support?" data-ar="💬 إزاي أتواصل مع الدعم؟">
                     <span>💬 إزاي أتواصل مع الدعم؟</span>
                     <span class="icon">▼</span>
@@ -2076,7 +2089,7 @@
     
     <footer id="contact">
         <div class="footer-container">
-            <div class="footer-about">
+            <div class="footer-about" data-aos="fade-right" data-aos-duration="700"> <!-- Added AOS -->
                 <div class="footer-logo">
                     <!-- Copied Header Logo -->
                     <img src="images/headerlogo.png" alt="Moreh Logo" class="header-logo-img">
@@ -2092,7 +2105,7 @@
                 </div>
             </div>
             
-            <div class="footer-links">
+            <div class="footer-links" data-aos="fade-up" data-aos-duration="700" data-aos-delay="200"> <!-- Added AOS -->
                 <h3 id="footer-links-heading">Quick Links</h3>
                 <ul>
                     <li><a href="#" data-en="Home" data-ar="الرئيسية">Home</a></li>
@@ -2104,7 +2117,7 @@
                 </ul>
             </div>
             
-            <div class="footer-contact">
+            <div class="footer-contact" data-aos="fade-left" data-aos-duration="700" data-aos-delay="400"> <!-- Added AOS -->
                 <h3 id="footer-contact-heading">Contact Us</h3>
                 <div class="contact-item">
                     <span class="contact-icon">📍</span>
@@ -2121,7 +2134,7 @@
             </div>
         </div>
         
-        <div class="copyright">
+        <div class="copyright" data-aos="fade-up" data-aos-duration="700"> <!-- Added AOS -->
             <p id="copyright-text">&copy; 2025 Moreh Furniture. All Rights Reserved.</p>
         </div>
     </footer>
@@ -2555,6 +2568,7 @@
         </div>
     </div>
     
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> <!-- Added AOS JS -->
     <script>
         // Global object to store current image index for each modal
         const currentImageIndexes = {};
@@ -2779,7 +2793,7 @@
             // IMPORTANT: Replace '201553188286' with your actual WhatsApp phone number (including country code, no + or 00)
             // You can customize the pre-filled message after '?text='
             primaryButton.onclick = function() {
-                window.open('https://wa.me/201553188286?text=Hello!%20I%27m%20interested%20in%20a%20product%20from%20your%20website.', '_blank');
+                window.open('https://wa.me/201553188286?text=Hello!%20I%27m%20interested%20in%20a%20product%20from%20your%27s%20website.', '_blank');
             };
 
             modalOverlay.classList.add('active');
@@ -2869,7 +2883,8 @@
             });
         });
         
-        // Animate elements when visible
+        // Animate elements when visible (Removed as AOS handles this)
+        /*
         function animateOnScroll() {
             const elements = document.querySelectorAll('.section-title h2, .product-card, .about-text');
             
@@ -2886,6 +2901,7 @@
         
         window.addEventListener('scroll', animateOnScroll);
         animateOnScroll(); // Initial check
+        */
         
         // Mobile Menu
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
@@ -3060,6 +3076,14 @@
 
         // Initial language and dark mode setting
         document.addEventListener('DOMContentLoaded', () => {
+            // Initialize AOS
+            AOS.init({
+                duration: 600, // default duration for animations
+                easing: 'ease-out', // default easing for animations
+                once: true, // whether animation should happen only once - while scrolling down
+                mirror: false, // whether elements should animate out while scrolling past them
+            });
+
             // Language Toggle
             const languageToggleBtn = document.getElementById('language-toggle-btn');
             languageToggleBtn.addEventListener('click', () => {
@@ -3128,3 +3152,4 @@
     </script>
 </body>
 </html>
+
