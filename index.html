@@ -17,6 +17,7 @@
             --text-light: #f5f5f5;
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
+            --header-height: 70px; /* Define header height for mobile menu positioning */
 
             /* Dark Mode Colors - Default to light mode values */
             --bg-color: var(--primary-light);
@@ -94,13 +95,55 @@
             background-image: linear-gradient(to right, var(--header-gradient-start), var(--header-gradient-end));
             background-size: 200% 100%;
             animation: headerBackgroundMove 10s linear infinite alternate;
-            transition: background-color 0.5s ease, box-shadow 0.5s ease, background-image 0.5s ease;
+            transition: all 0.3s ease-in-out; /* Modified for smooth transition of all properties */
+            height: auto; /* Ensure height can adjust */
+            /* Removed padding from here, now controlled by .header-container */
+            border-radius: 0; /* Initial state */
+        }
+
+        /* Scrolled Header Styles */
+        header.scrolled {
+            height: 60px; /* Slightly reduced height */
+            padding: 0 0; /* Adjust padding to reduce height, container will handle internal spacing */
+            border-radius: 30px; /* Pill shape */
+            top: 10px; /* Small vertical space from top */
+            left: 20px; /* Add horizontal space */
+            right: 20px; /* Add horizontal space */
+            width: calc(100% - 40px); /* Adjust width to account for horizontal space */
+            max-width: 1160px; /* Max width for desktop, considering 20px on each side from 1200px */
+            margin: 0 auto; /* Center the header */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Subtle drop shadow */
+            background-image: linear-gradient(to right, var(--header-gradient-start), var(--header-gradient-end)); /* Keep gradient */
+        }
+
+        /* Adjust header-container padding for scrolled state to maintain internal spacing */
+        header.scrolled .header-container {
+            padding: 0 30px; /* Maintain horizontal padding */
+            height: 100%; /* Ensure container fills the reduced header height */
+            align-items: center; /* Vertically center content */
+        }
+
+        /* Adjust logo image size for scrolled state */
+        header.scrolled .header-logo-img {
+            width: 120px; /* Smaller width for scrolled state */
+        }
+
+        /* Adjust nav links for scrolled state */
+        header.scrolled nav ul li a {
+            font-size: 16px; /* Slightly smaller font size */
+            padding: 5px 0; /* Reduced padding */
+        }
+
+        /* Adjust header icons for scrolled state */
+        header.scrolled .header-icons .icon-btn img {
+            width: 22px; /* Slightly smaller icons */
+            height: 22px;
         }
 
         .header-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px 30px; /* Increased padding */
+            padding: 12px 30px; /* Adjusted vertical padding for a more compact look */
             display: flex;
             justify-content: space-between; /* Default for mobile, overridden for desktop */
             align-items: center;
@@ -111,27 +154,35 @@
             display: flex;
             align-items: center;
             cursor: pointer;
+            /* Ensure no extra margin/padding from previous text logo styles */
+            margin-left: 0;
+            margin-right: 0;
+            padding: 0;
         }
 
+        /* New Logo Image Styles */
+        .header-logo-img {
+            width: 150px; /* Set the desired width - MODIFIED for bolder appearance */
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Remove extra space below the image */
+            transition: transform 0.3s ease; /* Add a subtle hover effect */
+        }
+
+        .header-logo-img:hover {
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+
+        /* Hide the old logo text elements */
         .logo-text {
-            font-size: 32px; /* Increased font size */
-            font-weight: bold;
-            margin-left: 10px;
-            display: flex;
-            flex-direction: column;
-            color: var(--text-color); /* Ensure logo text changes color */
-            transition: color 0.5s ease;
+            display: none; 
         }
 
         .logo-arabic {
-            font-size: 24px; /* Increased font size */
-            line-height: 1;
+            display: none;
         }
 
         .logo-english {
-            font-size: 24px; /* Increased font size */
-            line-height: 1;
-            letter-spacing: 1px; /* Added letter spacing */
+            display: none;
         }
 
         nav {
@@ -203,8 +254,8 @@
 
         /* Specific Icon Adjustments */
         .language-toggle-btn img {
-            width: 26px; /* Increased size to match dark mode toggle */
-            height: 26px;
+            width: 24px; /* Increased size to match dark mode toggle */
+            height: 24px;
             filter: invert(0); /* Make it black in light mode */
             transition: filter 0.5s ease;
         }
@@ -214,7 +265,7 @@
         }
 
         .dark-mode-toggle-btn img {
-            width: 30px; /* Size for moon icon */
+            width: 26px; /* Size for moon icon */
             height: 26px;
             filter: invert(0); /* Brownish tint for light mode */
             transition: filter 0.5s ease;
@@ -226,7 +277,7 @@
 
         .mobile-menu-btn {
             display: none; /* Hidden by default on desktop */
-            font-size: 28px; /* Keep existing size for hamburger */
+            font-size: 24px; /* Keep existing size for hamburger */
             color: #7B5E42; /* Medium brown for hamburger icon */
             transition: color 0.5s ease;
         }
@@ -250,7 +301,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 70px;
+            margin-top: 0; /* Adjusted to remove space between header and hero */
             animation: fadeIn 1s ease-in-out;
             position: relative;
             overflow: hidden;
@@ -1014,9 +1065,14 @@
                 margin-bottom: 0;
             }
 
+            /* Responsive logo image size */
+            .header-logo-img {
+                width: 100px; /* Smaller width for tablets */
+            }
+
             nav {
                 position: absolute; /* Absolute positioning for overlay */
-                top: 100%; /* Position below header */
+                top: var(--header-height); /* Position below header using variable */
                 right: 0; /* Align to the right */
                 left: auto; /* Ensure left is not set */
                 width: auto; /* Auto width */
@@ -1026,15 +1082,19 @@
                 background-color: var(--header-bg); /* Use header-bg for mobile nav */
                 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
                 border-radius: 8px;
-                padding: 15px 0;
-                display: none; /* Hidden by default on mobile */
-                transform: translateX(100%); /* Start off-screen right */
-                transition: transform 0.3s ease-out, background-color 0.5s ease;
+                padding: 0; /* Start with 0 padding for slide effect */
+                max-height: 0; /* Initially hidden */
+                overflow: hidden; /* Hide overflow during transition */
+                opacity: 0; /* Start transparent */
+                transform: translateY(-20px); /* Start slightly above */
+                transition: max-height 0.5s ease-out, opacity 0.5s ease-out, transform 0.5s ease-out, background-color 0.5s ease;
             }
 
             nav.show {
-                display: flex; /* Show when toggled */
-                transform: translateX(0); /* Slide in from right */
+                max-height: 500px; /* Sufficiently large to show all content */
+                padding: 15px 0; /* Apply padding when shown */
+                opacity: 1; /* Fully visible */
+                transform: translateY(0); /* Slide into place */
             }
 
             nav ul {
@@ -1067,6 +1127,9 @@
 
             .mobile-menu-btn {
                 display: block; /* Show on smaller screens */
+                font-weight: 550;
+                margin-bottom: 3px;
+                font-size: 26px; /* MODIFIED: Smaller size to match header icons */
             }
             
             .hero {
@@ -1134,6 +1197,29 @@
             .contact-item {
                 justify-content: center; /* Center contact items */
             }
+
+            /* Responsive adjustments for scrolled state */
+            header.scrolled {
+                height: 50px; /* Even smaller height for mobile scrolled */
+                top: 10px;
+                left: 15px;
+                right: 15px;
+                width: calc(100% - 30px);
+                border-radius: 25px; /* Adjust border-radius for mobile */
+            }
+
+            header.scrolled .header-logo-img {
+                width: 80px; /* Smaller logo for mobile scrolled */
+            }
+
+            header.scrolled .mobile-menu-btn {
+                font-size: 22px; /* Adjust mobile menu icon size */
+            }
+
+            /* Ensure mobile menu positioning is correct when scrolled */
+            header.scrolled nav {
+                top: 60px; /* Position below the smaller header */
+            }
         }
 
         @media (max-width: 576px) {
@@ -1141,20 +1227,9 @@
                 padding: 10px 15px;
             }
             
-            .logo-text {
-                font-size: 28px;
-            }
-
-            .logo-arabic, .logo-english {
-                font-size: 20px;
-            }
-
-            .header-icons {
-                gap: 8px; /* Even smaller gap for very small screens */
-            }
-
-            .icon-btn {
-                font-size: 24px; /* Smaller icons on very small screens */
+            /* Responsive logo image size for smallest screens */
+            .header-logo-img {
+                width: 80px; /* Even smaller width for mobile phones */
             }
 
             nav {
@@ -1293,6 +1368,27 @@
                 padding-top: 20px;
                 font-size: 14px;
             }
+
+            header.scrolled {
+                height: 45px; /* Smallest height for very small screens */
+                top: 8px;
+                left: 10px;
+                right: 10px;
+                width: calc(100% - 20px);
+                border-radius: 22px;
+            }
+
+            header.scrolled .header-logo-img {
+                width: 70px; /* Smallest logo for very small screens */
+            }
+
+            header.scrolled .mobile-menu-btn {
+                font-size: 20px;
+            }
+
+            header.scrolled nav {
+                top: 55px; /* Position below the smallest header */
+            }
         }
 
         /* RTL Specific Styles */
@@ -1306,9 +1402,8 @@
             justify-content: space-between; /* Maintain space between items */
         }
 
-        body.rtl .logo-text {
-            margin-left: 0;
-            margin-right: 10px; /* Adjust margin for RTL */
+        body.rtl .logo {
+            /* No specific margin adjustments needed for the image logo in RTL, as it's centered */
         }
 
         body.rtl nav ul {
@@ -1357,8 +1452,8 @@
 
         body.rtl .footer-links h3::after,
         body.rtl .footer-contact h3::after {
-            left: 0; /* Underline starts from left for RTL */
-            right: auto;
+            left: auto; /* Underline starts from right for RTL */
+            right: 0;
         }
 
         body.rtl .footer-links ul li a:hover {
@@ -1427,11 +1522,11 @@
                 left: auto;
                 right: 0; /* Align mobile menu to the right in RTL */
                 margin: 0 20px; /* Maintain side margin */
-                transform: translateX(100%); /* Start off-screen right */
+                transform: translateY(-20px); /* Start off-screen right */
             }
 
             body.rtl nav.show {
-                transform: translateX(0); /* Slide in from right */
+                transform: translateY(0); /* Slide in from right */
             }
 
             body.rtl nav ul {
@@ -1562,7 +1657,6 @@
             max-height: 200px; /* Adjust as needed based on content */
             padding: 20px 30px;
         }
-
         /* RTL adjustments for FAQ */
         body.rtl .faq-question {
             text-align: right;
@@ -1615,10 +1709,8 @@
     <header>
         <div class="header-container">
             <div class="logo" onclick="window.location.href='#'">
-                <div class="logo-text">
-                    <span class="logo-english" id="header-logo-english">Moreh</span>
-                    <span class="logo-arabic" id="header-logo-arabic"></span>
-                </div>
+                <!-- Replaced the logo-text div with the new logo image -->
+                <img src="images/headerlogo.png" alt="Moreh Logo" class="header-logo-img">
             </div>
             
             <nav>
@@ -1986,10 +2078,8 @@
         <div class="footer-container">
             <div class="footer-about">
                 <div class="footer-logo">
-                    <div class="logo-text">
-                        <span class="logo-english" id="footer-logo-english">Moreh</span>
-                        <span class="logo-arabic" id="footer-logo-arabic">مريح</span>
-                    </div>
+                    <!-- Copied Header Logo -->
+                    <img src="images/headerlogo.png" alt="Moreh Logo" class="header-logo-img">
                 </div>
                 <p id="footer-about-text">Modern minimalist furniture combining sleek design with exceptional functionality for discerning homeowners.</p>
                 <div class="social-icons">
@@ -2048,7 +2138,7 @@
             <button class="modal-close" onclick="closeModal()">×</button>
             <div class="modal-image">
                 <div class="carousel-container">
-                    <img src="https://via.placeholder.com/600x400/F5F5F5/333333?text=Minimalist+Sofa+1" alt="Full view of minimalist sectional sofa" class="carousel-image" />
+                    <img src="sofra/1.jpg" alt="Full view of minimalist sectional sofa" class="carousel-image" />
                     <button class="carousel-button prev" onclick="prevImage('product1')">❮</button>
                     <button class="carousel-button next" onclick="nextImage('product1')">❯</button>
                 </div>
@@ -2605,9 +2695,9 @@
                 document.body.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
             }
 
-            // Update Header Logo
-            document.getElementById('header-logo-english').textContent = currentTranslations['header-logo-english'];
-            document.getElementById('header-logo-arabic').textContent = currentTranslations['header-logo-arabic'];
+            // Update Header Logo (no longer text, but keeping the IDs for potential future use or if text is re-introduced)
+            // document.getElementById('header-logo-english').textContent = currentTranslations['header-logo-english'];
+            // document.getElementById('header-logo-arabic').textContent = currentTranslations['header-logo-arabic'];
 
             // Update Header Navigation
             document.querySelector('nav ul li a[data-en="Home"]').textContent = currentTranslations['nav-home'];
@@ -2624,6 +2714,7 @@
             document.getElementById('hero-btn-text').textContent = currentTranslations['hero-btn-text'];
 
             // Update Products Section Title
+            // This title should still be translatable as it contains both English and Arabic
             document.getElementById('products-section-title').textContent = currentTranslations['products-section-title'];
 
             // Update About Section
@@ -2647,8 +2738,8 @@
 
 
             // Update Footer
-            document.getElementById('footer-logo-english').textContent = currentTranslations['footer-logo-english'];
-            document.getElementById('footer-logo-arabic').textContent = currentTranslations['footer-logo-arabic'];
+            // document.getElementById('footer-logo-english').textContent = currentTranslations['footer-logo-english']; // Logo is now image
+            // document.getElementById('footer-logo-arabic').textContent = currentTranslations['footer-logo-arabic']; // Logo is now image
             document.getElementById('footer-about-text').textContent = currentTranslations['footer-about-text'];
             document.getElementById('footer-links-heading').textContent = currentTranslations['footer-links-heading'];
             document.getElementById('footer-contact-heading').textContent = currentTranslations['footer-contact-heading'];
@@ -2662,8 +2753,8 @@
                 link.textContent = link.dataset[lang];
             });
 
-            // Update product titles and descriptions in modals (if they were translated)
-            // For now, these are hardcoded in the HTML, so no JS update needed unless translations are added to data attributes.
+            // Product titles and descriptions in modals are now hardcoded Arabic, no JS update needed.
+            // Testimonial texts, names, and titles are now hardcoded Arabic, no JS update needed.
         }
         
         // Modal Functions
@@ -2838,7 +2929,11 @@
                     this.directionX = directionX;
                     this.directionY = directionY;
                     this.size = size;
-                    this.color = color;
+                    let baseColor = 'rgba(0, 0, 0, 0.6)'; // Default for light mode
+                    if (document.body.classList.contains('dark-mode')) {
+                        baseColor = 'rgba(255, 255, 255, 0.6)'; // For dark mode
+                    }
+                    this.color = baseColor;
                 }
 
                 draw() {
@@ -2873,7 +2968,7 @@
                         if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
                             this.y += 10;
                         }
-                        if (mouse.y > this.y && this.y > this.size * 10) { // Corrected: 'the.size' changed to 'this.size'
+                        if (mouse.y > this.y && this.y > this.size * 10) {
                             this.y -= 10;
                         }
                     }
@@ -2891,14 +2986,18 @@
                     let y = (Math.random() * ((canvas.height - size * 2) - (size * 2)) + size * 2);
                     let directionX = (Math.random() * 0.5) - 0.25;
                     let directionY = (Math.random() * 0.5) - 0.25;
-                    let color = 'rgba(0, 0, 0, 0.6)';
-
-                    particles.push(new Particle(x, y, directionX, directionY, size, color));
+                    
+                    particles.push(new Particle(x, y, directionX, directionY, size));
                 }
             }
 
             function connect() {
                 let opacityValue = 1;
+                let lineColor = 'rgba(0, 0, 0,'; // Default for light mode
+                if (document.body.classList.contains('dark-mode')) {
+                    lineColor = 'rgba(255, 255, 255,'; // For dark mode
+                }
+
                 for (let a = 0; a < particles.length; a++) {
                     for (let b = a; b < particles.length; b++) {
                         let distance = ((particles[a].x - particles[b].x) * (particles[a].x - particles[b].x)) +
@@ -2906,7 +3005,7 @@
 
                         if (distance < (canvas.width / 7) * (canvas.height / 7)) {
                             opacityValue = 1 - (distance / 20000);
-                            ctx.strokeStyle = 'rgba(0, 0, 0,' + opacityValue + ')';
+                            ctx.strokeStyle = lineColor + opacityValue + ')';
                             ctx.lineWidth = 1;
                             ctx.beginPath();
                             ctx.moveTo(particles[a].x, particles[a].y);
@@ -2942,6 +3041,17 @@
                 mouse.x = undefined;
                 mouse.y = undefined;
             });
+
+            // Re-initialize particles on dark mode toggle to update colors
+            const darkModeToggleBtn = document.getElementById('dark-mode-toggle-btn');
+            if (darkModeToggleBtn) {
+                darkModeToggleBtn.addEventListener('click', () => {
+                    // Give a slight delay to allow CSS transition to apply dark mode class
+                    setTimeout(() => {
+                        init(); // Re-initialize particles with new colors
+                    }, 500); 
+                });
+            }
 
             resizeCanvas();
             init();
@@ -2996,6 +3106,24 @@
                     question.classList.toggle('active');
                 });
             });
+
+            // Header Scroll Behavior
+            const header = document.querySelector('header');
+            const scrollThreshold = 50; // Pixels to scroll before header transforms
+
+            function handleScroll() {
+                if (window.scrollY > scrollThreshold) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }
+
+            // Initial check in case the page is loaded with a scroll position
+            handleScroll();
+
+            // Add scroll event listener
+            window.addEventListener('scroll', handleScroll);
         });
     </script>
 </body>
