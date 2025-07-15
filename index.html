@@ -73,8 +73,9 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: background-color 0.5s ease, color 0.5s ease; /* Smooth transition for dark mode */
-            overflow-x: hidden;
+            /* Removed overflow-x: hidden; */ 
             line-height: 1.6; /* Improve readability */
+            /* Removed explicit overflow-y: auto; as it's default and can sometimes cause a second scrollbar if not needed */
         }
 
         /* Arabic Font for RTL */
@@ -600,7 +601,7 @@
         }
 
         .footer-logo .logo-arabic {
-            font-size: 22px; /* Increased font size */
+            display: none;
         }
 
         .footer-about p {
@@ -731,7 +732,7 @@
             width: 90%;
             max-width: 900px;
             max-height: 90vh;
-            overflow-y: auto;
+            overflow-y: auto; /* Allows vertical scrolling within the modal if content exceeds max-height */
             display: grid;
             grid-template-columns: 1fr 1fr;
             position: relative;
@@ -1254,10 +1255,6 @@
             
             section {
                 padding: 40px 10px;
-            }
-            
-            .section-title h2 {
-                font-size: 24px;
             }
             
             .products-grid {
@@ -2797,7 +2794,7 @@
             };
 
             modalOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            document.body.style.overflow = 'hidden'; // Hide main body scroll when modal is open
         }
         
         function closeModal() {
@@ -2814,7 +2811,7 @@
                     // setting it to null is fine, or you could add a generic "Contact Us" function if needed.
                 }
             });
-            document.body.style.overflow = '';
+            document.body.style.overflow = ''; // Restore body scroll when modal is closed
         }
         
         // Close modal when clicking outside
@@ -3152,4 +3149,3 @@
     </script>
 </body>
 </html>
-
